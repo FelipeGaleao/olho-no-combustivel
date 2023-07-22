@@ -1,0 +1,8 @@
+env
+scrapping_data\pmqc\*
+*_cache
+*/__pycache__
+/*.pytest_cache
+*.csv
+scrapping_data\pmqc_processed\coletas.json
+*coletas.json
