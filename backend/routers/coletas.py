@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 import os
 import json
 from typing import Union
@@ -50,8 +50,20 @@ async def get_postos_by_matriz(matriz_cnpj: str):
     tags=["coletas"],
 )
 async def get_coletas_by_cnpj(CnpjPosto: str):
+    if CnpjPosto == "undefined":
+        # return with response status code 500
+        raise HTTPException(
+            status_code=400,
+            detail="CnpjPosto is undefined",
+            headers={"X-Error": "There goes my error"},
+        )
+
     if CnpjPosto is None:
-        return {"error": "CnpjPosto is required"}
+        raise HTTPException(
+            status_code=400,
+            detail="CnpjPosto is required",
+            headers={"X-Error": "There goes my error"},
+        )
     # else:
     #     CnpjPosto = int(CnpjPosto)
 

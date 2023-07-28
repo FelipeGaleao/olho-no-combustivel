@@ -13,7 +13,12 @@ router = APIRouter()
     tags=["postos"],
 )
 async def get_postos(
-    Municipio: Union[str, None] = None, Uf: str = "MS", limit: int = 100, page: int = 1
+    Municipio: Union[str, None] = None,
+    Uf: str = "MS",
+    limit: int = 100,
+    page: int = 1,
+    Latitude: Union[str, None] = None,
+    Longitude: Union[str, None] = None,
 ):
     print("get_postos called", Uf, limit, page)
     if limit is None:
@@ -32,6 +37,22 @@ async def get_postos(
     # query json to get all postos from Uf
     postos = []
     for posto in json_postos:
+        # filtrar por latitude e longitude com distância de 30km
+        if Latitude is not None and Longitude is not None:
+            print("buscando por latitude e longitude", Latitude, Longitude)
+            # filtrar postos em um raio de 30km de latitude e longitude
+            postos_encontrados = []
+            for posto in json_postos:
+                if posto["Latitude"] is not None and posto["Longitude"] is not None:
+                    # calcular distância entre latitude e longitude
+                    distancia = (
+                        (float(posto["Latitude"]) - float(Latitude)) ** 2
+                        + (float(posto["Longitude"]) - float(Longitude)) ** 2
+                    ) ** 0.5
+                    if distancia < 0.3:
+                        postos_encontrados.append(posto)
+            return postos_encontrados
+
         if Municipio is not None:
             if posto["Uf"] == Uf and posto["Município"] == Municipio:
                 postos.append(posto)
