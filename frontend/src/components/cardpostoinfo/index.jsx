@@ -154,7 +154,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
             </Card.Section>
             <Card.Section className={classes.section} mt="md">
                 <Text fz="sm" c="dimmed" className={classes.label}>
-                    Coletas
+                    Programa de Monitoramento da Qualidade dos Combustíveis
                 </Text>
             </Card.Section>
             <Card.Section>
