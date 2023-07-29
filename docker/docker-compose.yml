@@ -5,12 +5,24 @@
 version: "3.8"
 
 services:
-  web:
+  backend:
     build:
-      context: backend
+      context: ../backend
       dockerfile: Dockerfile
-    command: uvicorn app.main:app --host 0.0.0.0
+    command: uvicorn app.main:app --host 0.0.0.0 --reload
     volumes:
-      - .:/app
+      - ../backend/:/code/app/
+      - ../scrapping_data/pmqc_processed/:/code/app/data/
     ports:
       - 8008:8000
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    command: npm run dev
+    volumes:
+      - ../frontend/:/code/app/
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
