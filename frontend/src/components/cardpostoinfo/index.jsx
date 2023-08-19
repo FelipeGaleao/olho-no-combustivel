@@ -3,6 +3,10 @@ import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler
 import { TabelaColeta } from './tabelaColeta';
 import { api } from "../../services/api";
 import { useEffect, useState } from 'react';
+import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
+import infoPanelState from '../../atoms';
+
+
 const useStyles = createStyles((theme) => ({
     card: {
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
@@ -45,6 +49,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
     const [coletas, setColetas] = useState([])
     const [situacaoPainel, setSituacaoPainel] = useState(true)
     const [resultadoConsulta, setResultadoConsulta] = useState(false)
+    const [PanelState, setInfoPanelState] = useRecoilState(infoPanelState);
     const { classes } = useStyles();
     const mockdata = [
         { label: infoPostoSelecionado.Endereço, icon: IconGasStation, title: 'Endereço' },
@@ -88,14 +93,14 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
     ));
 
     return (
-        <Card style={{ display: infoPostoSelecionado.situacaoPainel ? 'block' : 'none' }} withBorder radius="md">
+        <Card style={{ display: PanelState ? 'block' : 'none' }} withBorder radius="md">
             {// Botão para fechar o card
                 <Button
                     variant="outline"
                     color="blue"
                     style={{ position: 'absolute', right: '0px', margin: '10px', zIndex: 9999 }}
                     onClick={() => {
-                        infoPostoSelecionado.situacaoPainel = false
+                        setInfoPanelState(!PanelState)
                     }
                     }
                 >Fechar</Button>
