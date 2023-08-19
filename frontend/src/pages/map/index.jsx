@@ -46,7 +46,10 @@ const MapPage = () => {
             }}>
                 { // if postos is not empty render markers 
                     postos && postos.map(posto => (
-                        <Marker key={posto.CnpjPosto} width={70} anchor={[posto.Latitude, posto.Longitude]} color={color} onClick={
+                        <Marker key={posto.CnpjPosto} width={70} anchor={[posto.Latitude, posto.Longitude]} color={
+                            // set color based on posto situacao
+                            posto.Distribuidora === 'BANDEIRA BRANCA' ? 'purple' : 'green'
+                        } onClick={
                             // show posto name on click and set situacaoPainel 
                             () => {
                                 posto.situacaoPainel = true
