@@ -19,10 +19,10 @@ async def get_postos_by_matriz(matriz_cnpj: str):
         matriz_cnpj = int(matriz_cnpj)
 
     json_postos = json.load(
-        open("..\scrapping_data\pmqc_processed\postos.json", "r", encoding="utf8")
+        open("/code/app/data/postos.json", "r", encoding="utf8")
     )
     json_coletas = json.load(
-        open("..\scrapping_data\pmqc_processed\coletas.json", "r", encoding="utf8")
+        open("/code/app/data/coletas.json", "r", encoding="utf8")
     )
 
     data_posto = {"detalhe_posto": {}, "coletas_posto": []}
@@ -68,10 +68,10 @@ async def get_coletas_by_cnpj(CnpjPosto: str):
     #     CnpjPosto = int(CnpjPosto)
 
     json_postos = json.load(
-        open("..\scrapping_data\pmqc_processed\postos.json", "r", encoding="utf8")
+        open("/code/app/data/postos.json", "r", encoding="utf8")
     )
     json_coletas = json.load(
-        open("..\scrapping_data\pmqc_processed\coletas.json", "r", encoding="utf8")
+        open("/code/app/data/coletas.json", "r", encoding="utf8")
     )
 
     data_posto = {"detalhe_posto": {}, "coletas_posto": []}
