@@ -45,8 +45,10 @@ export default function AppShellDemo() {
                                 mr="xl"
                             />
                         </MediaQuery>
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center', width: '100%', height: '100%' }}>
+                            <Text><strong>Olho no Combustível</strong></Text>
 
-                        <Text><strong>Olho no Combustível</strong></Text>
+                        </div>
                     </div>
                 </Header>
             }
