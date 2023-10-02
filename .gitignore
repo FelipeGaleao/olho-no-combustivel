@@ -6,3 +6,4 @@ scrapping_data\pmqc\*
 *.csv
 scrapping_data\pmqc_processed\coletas.json
 node_modules/*
+scrapping_data/levantamento_semanal_precos/*

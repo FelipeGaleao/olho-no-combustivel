@@ -31,9 +31,7 @@ async def get_postos(
     else:
         page = int(page)
 
-    json_postos = json.load(
-        open("/code/app/data/postos.json", "r", encoding="utf8")
-    )
+    json_postos = json.load(open("/code/app/data/postos.json", "r", encoding="utf8"))
     # query json to get all postos from Uf
     postos = []
     for posto in json_postos:
@@ -76,14 +74,11 @@ async def get_postos(
 async def get_posto(posto_cnpj: str):
     if posto_cnpj is None:
         return {"error": "posto_cnpj is required"}
-    json_postos = json.load(
-        open("/code/app/data/postos.json", "r", encoding="utf8")
-    )
-    json_coletas = json.load(
-        open("/code/app/data/coletas.json", "r", encoding="utf8")
-    )
+    json_postos = json.load(open("/code/app/data/postos.json", "r", encoding="utf8"))
+    json_coletas = json.load(open("/code/app/data/coletas.json", "r", encoding="utf8"))
+    json_precos = json.load(open("/code/app/data/precos.json", "r", encoding="utf8"))
 
-    data_posto = {"detalhe_posto": {}, "coletas_posto": []}
+    data_posto = {"detalhe_posto": {}, "coletas_posto": [], "precos_posto": []}
     # search posto by cnpj
     for posto in json_postos:
         if posto["CnpjPosto"] == posto_cnpj:
@@ -93,6 +88,10 @@ async def get_posto(posto_cnpj: str):
     for coleta in json_coletas:
         if coleta["CnpjPosto"] == posto_cnpj:
             data_posto["coletas_posto"].append(coleta)
+
+    for preco in json_precos:
+        if preco["cnpj"] == posto_cnpj:
+            data_posto["precos_posto"].append(preco)
 
     if data_posto["detalhe_posto"] != {}:
         return data_posto
