@@ -5,12 +5,23 @@
 version: "3.8"
 
 services:
-  web:
+  backend_app:
     build:
-      context: backend
+      context: ../backend
       dockerfile: Dockerfile
     command: uvicorn app.main:app --host 0.0.0.0
     volumes:
       - .:/app
     ports:
       - 8008:8000
+  frontend_app:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    command: npm run serve -- --port 8080
+    volumes:
+      - .:/app
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend_app
