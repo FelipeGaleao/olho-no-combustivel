@@ -25,3 +25,5 @@ services:
       - 8080:8080
     depends_on:
       - backend_app
+    environment:
+      - BACKEND_APP=https://olhonocombustivel-api.up.railway.app/
