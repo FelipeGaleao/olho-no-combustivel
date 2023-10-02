@@ -32,7 +32,7 @@ async def get_postos(
         page = int(page)
 
     json_postos = json.load(
-        open("..\scrapping_data\pmqc_processed\postos.json", "r", encoding="utf8")
+        open("/code/app/data/postos.json", "r", encoding="utf8")
     )
     # query json to get all postos from Uf
     postos = []
@@ -77,10 +77,10 @@ async def get_posto(posto_cnpj: str):
     if posto_cnpj is None:
         return {"error": "posto_cnpj is required"}
     json_postos = json.load(
-        open("..\scrapping_data\pmqc_processed\postos.json", "r", encoding="utf8")
+        open("/code/app/data/postos.json", "r", encoding="utf8")
     )
     json_coletas = json.load(
-        open("..\scrapping_data\pmqc_processed\coletas.json", "r", encoding="utf8")
+        open("/code/app/data/coletas.json", "r", encoding="utf8")
     )
 
     data_posto = {"detalhe_posto": {}, "coletas_posto": []}

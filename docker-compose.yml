@@ -1,0 +1,31 @@
+# @format
+
+# docker-compose.yml
+
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    command: uvicorn app.main:app --host 0.0.0.0
+    volumes:
+      - ./backend/:/code/app
+      - ./scrapping_data/pmqc_processed:/code/app/data
+    ports:
+      - 8000:8000
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    command: npm run dev --host
+    volumes:
+      - ./frontend/:/app
+      - /app/node_modules
+    ports:
+      - 5173:5173
+    expose:
+      - 5173
+    depends_on:
+      - backend

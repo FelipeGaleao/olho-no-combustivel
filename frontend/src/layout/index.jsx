@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
     AppShell,
+    Aside,
     Navbar,
     Header,
     Text,
@@ -23,17 +24,15 @@ export default function AppShellDemo() {
                 },
             }}
             navbarOffsetBreakpoint="sm"
-            asideOffsetBreakpoint="sm"
-            navbar={
-                <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-                    <Text>Application navbar</Text>
-                </Navbar>
-            }
             aside={
-                <Sidebar />
+                <MediaQuery smallerThan="sm" >
+                    <Aside width={{ sm: '100%', lg: 0 }}>
+                        <Sidebar />
+                    </Aside>
+                </MediaQuery>
             }
             header={
-                <Header height={{ base: 50, md: 70 }} p="md"
+                <Header height={{ base: 50, md: 50 }} p="md"
                     style={{ backgroundColor: '#228be6', borderBottom: 'none' }}
                 >
                     <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>

@@ -3,6 +3,8 @@ import { api } from "../../services/api"
 
 import { useEffect, useState } from "react"
 import { CardPostoInfo } from "../../components/cardpostoinfo"
+import { useRecoilValue, useSetRecoilState } from "recoil"
+import infoPanelState from "../../atoms"
 
 const MapPage = () => {
     const [postos, setPostos] = useState([])
@@ -11,6 +13,8 @@ const MapPage = () => {
     const [postoSelecionado, setPostoSelecionado] = useState({})
     const [hue, setHue] = useState(0)
     const color = `#0000ff`
+    const PanelState = useRecoilValue(infoPanelState);
+    const setInfoPanelState = useSetRecoilState(infoPanelState);
 
     const setPainelAberto = (value) => {
         // set to local Storage
@@ -46,10 +50,14 @@ const MapPage = () => {
             }}>
                 { // if postos is not empty render markers 
                     postos && postos.map(posto => (
-                        <Marker key={posto.CnpjPosto} width={70} anchor={[posto.Latitude, posto.Longitude]} color={color} onClick={
+                        <Marker key={posto.CnpjPosto} width={70} anchor={[posto.Latitude, posto.Longitude]} color={
+                            // set color based on posto situacao
+                            posto.Distribuidora === 'BANDEIRA BRANCA' ? 'purple' : 'green'
+                        } onClick={
                             // show posto name on click and set situacaoPainel 
                             () => {
                                 posto.situacaoPainel = true
+                                PanelState ? setInfoPanelState(true) : setInfoPanelState(true)
                                 setPostoSelecionado(posto)
                             }
                         } />

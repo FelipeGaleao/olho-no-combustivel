@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { createStyles, Navbar, Group, Code, getStylesRef, rem } from '@mantine/core';
+import { createStyles, Divider, Button, Navbar, Group, Code, getStylesRef, rem } from '@mantine/core';
 import { useNavigate } from "react-router-dom";
 
 import {
-    IconReceipt2,
+    IconMap2,
     IconHome,
+
 } from '@tabler/icons-react';
 // import { MantineLogo } from '@mantine/ds';
 
@@ -84,15 +85,16 @@ const useStyles = createStyles((theme) => ({
 
 const data = [
     { link: '', label: 'Inicio', icon: IconHome },
-    { link: 'map', label: 'Mapas', icon: IconReceipt2 },
+    { link: 'map', label: 'Mapa', icon: IconMap2 },
 ];
 
-export function Sidebar() {
+export function Sidebar({ props }) {
     const { classes, cx } = useStyles();
+    const [visible, setVisible] = useState(true)
     const [active, setActive] = useState('Billing');
     const navigate = useNavigate();
     const links = data.map((item) => (
-        <a
+        <a style={{ display: visible ? 'block' : 'none' }}
             className={cx(classes.link, { [classes.linkActive]: item.label === active })}
             href={item.link}
             key={item.label}
@@ -104,18 +106,28 @@ export function Sidebar() {
         >
             <item.icon className={classes.linkIcon} stroke={1.5} />
             <span>{item.label}</span>
-        </a>
+        </a >
     ));
 
     return (
-        <Navbar height={'100vh'} width={{ sm: 300 }} p="md" className={classes.navbar}>
+        <Navbar style={{ width: '200px' }} height={visible ? '100vh' : '70px'} p="15px" className={classes.navbar}>
             <Navbar.Section grow>
                 <Group className={classes.header} position="apart">
                     {/* <MantineLogo size={28} inverted /> */}
                     <Code className={classes.version}>v0.0.1</Code>
+                    {/* button to hide navbar */}
+                    <Button variant={'light'} color={'white'} onClick={() => setVisible(!visible)}>
+                        Menu
+                    </Button>
                 </Group>
                 {links}
             </Navbar.Section>
+            <Navbar.Section grow>
+                <Group>
+                    <div style={{ fontSize: '10px' }}>Contato <br />maycon.mota@ufms.br</div>
+                </Group>
+            </Navbar.Section>
         </Navbar>
+
     );
 }
