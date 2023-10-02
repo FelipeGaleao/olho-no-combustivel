@@ -5,5 +5,4 @@ scrapping_data\pmqc\*
 /*.pytest_cache
 *.csv
 scrapping_data\pmqc_processed\coletas.json
-*coletas.json
 node_modules/*
