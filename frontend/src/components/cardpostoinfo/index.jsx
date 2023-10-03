@@ -47,6 +47,7 @@ const useStyles = createStyles((theme) => ({
 
 export function CardPostoInfo({ infoPostoSelecionado }) {
     const [coletas, setColetas] = useState([])
+    const [precos, setPrecos] = useState([])
     const [situacaoPainel, setSituacaoPainel] = useState(true)
     const [resultadoConsulta, setResultadoConsulta] = useState(false)
     const [PanelState, setInfoPanelState] = useRecoilState(infoPanelState);
@@ -63,10 +64,16 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
         // buscar coletas e ordenar por data
         setResultadoConsulta(false)
         let coletas = []
+        let precos = []
+
         if (infoPostoSelecionado && infoPostoSelecionado.CnpjPosto) {
             await api.get(`/coletas/getByCnpj/${infoPostoSelecionado.CnpjPosto}`).then(response => {
                 coletas = response.data
             })
+            await api.get(`/postos/getByCnpj/${infoPostoSelecionado.CnpjPosto}`).then(response => {
+                precos = response.data.precos_posto
+            }
+            )
         }
         if (coletas.coletas_posto) {
             // sort coletas by date
@@ -75,7 +82,19 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
             }
             )
             setColetas(coletas)
+            setPrecos(precos)
             setResultadoConsulta(true)
+        }
+    }
+
+    const getPrecos = (data, produto) => {
+        // listar produtos unicos no campo data
+        const precos = data.filter(item => item.produto === produto)
+        if (precos.length > 0) {
+            return precos[0].preco
+        }
+        else {
+            return 'Não encontrado'
         }
     }
 
@@ -143,7 +162,23 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                             Gasolina
                         </Text>
                         <Text fz="lg" fw={500}>
-                            R$5.431
+                            R$ {getPrecos(precos, 'GASOLINA COMUM')}
+                            {
+                                precos && precos.map((preco) => (
+                                    <div>
+                                        {preco.produto === 'GASOLINA COMUM' ? <Text fz="xs" tt="uppercase" fw={700}>
+                                            {
+                                                new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: 'numeric'
+                                                })
+                                            } - R$ {preco.preco}
+                                        </Text> : <></>}
+                                    </div>
+                                ))
+
+                            }
                         </Text>
                     </div>
                     <div>
@@ -151,7 +186,23 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                             Álcool
                         </Text>
                         <Text fz="lg" fw={500}>
-                            R$5.431
+                            R$ {getPrecos(precos, 'ETANOL')}
+                            {
+                                precos && precos.map((preco) => (
+                                    <div>
+                                        {preco.produto === 'ETANOL' ? <Text fz="xs" tt="uppercase" fw={700}>
+                                            {
+                                                new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: 'numeric'
+                                                })
+                                            } - R$ {preco.preco}
+                                        </Text> : <></>}
+                                    </div>
+                                ))
+
+                            }
                         </Text>
                     </div>
                     <div>
@@ -159,7 +210,23 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                             Diesel
                         </Text>
                         <Text fz="lg" fw={500}>
-                            R$5.431
+                            R$ {getPrecos(precos, 'DIESEL S500')}
+                            {
+                                precos && precos.map((preco) => (
+                                    <div>
+                                        {preco.produto === 'DIESEL S500' ? <Text fz="xs" tt="uppercase" fw={700}>
+                                            {
+                                                new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: 'numeric'
+                                                })
+                                            } - R$ {preco.preco}
+                                        </Text> : <></>}
+                                    </div>
+                                ))
+
+                            }
                         </Text>
                     </div>
                 </Card>
