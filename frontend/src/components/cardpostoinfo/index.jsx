@@ -1,4 +1,4 @@
-import { Card, Image, Text, Group, Badge, createStyles, Progress, Center, Button, rem } from '@mantine/core';
+import { Card, Image, Text, Group, Badge, createStyles, Progress, Center, Button, rem, ScrollArea } from '@mantine/core';
 import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons-react';
 import { TabelaColeta } from './tabelaColeta';
 import { api } from "../../services/api";
@@ -96,7 +96,8 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
     ));
 
     return (
-        <Card style={{ display: PanelState ? 'block' : 'none', position: 'absolute', top: '96px', right: 0, opacity: 0.89 }} withBorder radius="md">
+        <Card style={{ display: PanelState ? 'block' : 'none', position: 'absolute', top: '64px', right: 0, opacity: 0.89, width: '720px', height: '90%', overflow: 'auto' }} withBorder radius="md">
+
             {// Botão para fechar o card
                 <Button
                     variant="outline"

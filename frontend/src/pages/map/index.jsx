@@ -43,8 +43,8 @@ const MapPage = () => {
     }, [])
 
     return (
-        <div>
-            <Map height={'120vh'} defaultCenter={[-20.461016, -54.612236]} defaultZoom={11} onBoundsChanged={(e) => {
+        <div style={{ height: '100%', width: '100%' }}>
+            <Map defaultCenter={[-20.461016, -54.612236]} defaultZoom={11} onBoundsChanged={(e) => {
                 setLimitesMapa(e.center)
                 fetchPostosCombustiveis()
             }}>
