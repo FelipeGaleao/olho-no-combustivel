@@ -104,7 +104,7 @@ export function TabelaColeta({ data }) {
                 />
             </div>
 
-            <Table sx={{ minWidth: 800 }} verticalSpacing="xs">
+            <Table sx={{ height: '100px', overflowX: 'auto' }} verticalSpacing="xs">
                 <thead>
                     <tr>
                         <th>Data da coleta</th>
