@@ -32,6 +32,17 @@ app.include_router(postos.router)
 app.include_router(coletas.router)
 
 
+def on_startup():
+    """Função executada no startup da aplicação"""
+    print("API is working :)")
+
+
+@app.on_event("startup")
+async def startup():
+    """Função executada no startup da aplicação"""
+    on_startup()
+
+
 @app.get("/", tags=[""])
 async def health_check():
     """Endpoint para verificar se a API está funcionando"""

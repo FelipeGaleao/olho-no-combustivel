@@ -9,10 +9,9 @@ services:
     build:
       context: backend
       dockerfile: Dockerfile
-    command: uvicorn app.main:app --host 0.0.0.0
+    command: uvicorn app.main:app --host 0.0.0.0 --reload
     volumes:
-      - ./backend/:/code/app
-      - ./scrapping_data/pmqc_processed:/code/app/data
+      - .:/app
     ports:
       - 8000:8000
   frontend:
