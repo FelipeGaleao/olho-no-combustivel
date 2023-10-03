@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { createStyles, Divider, Button, Navbar, Group, Code, getStylesRef, rem } from '@mantine/core';
 import { useNavigate } from "react-router-dom";
+import "../../../public/style.css";
+import "../../../public/styleguide.css";
 
 import {
     IconMap2,
@@ -47,7 +49,10 @@ const useStyles = createStyles((theme) => ({
     link: {
         ...theme.fn.focusStyles(),
         display: 'flex',
+        justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: '8px',
+        border: '1px solid #FFF',
         textDecoration: 'none',
         fontSize: theme.fontSizes.sm,
         color: theme.white,
@@ -56,6 +61,7 @@ const useStyles = createStyles((theme) => ({
         fontWeight: 500,
 
         '&:hover': {
+            color: '#FFF',
             backgroundColor: theme.fn.lighten(
                 theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
                 0.1
@@ -64,18 +70,22 @@ const useStyles = createStyles((theme) => ({
     },
 
     linkIcon: {
-        ref: getStylesRef('icon'),
-        color: theme.white,
+
+        '&, &:hover': {
+            color: '#FFF',
+            opacity: 1,
+        },
+        display: 'flex',
+        alignItems: 'center',
         opacity: 0.75,
         marginRight: theme.spacing.sm,
     },
 
     linkActive: {
+        color: '#228BE6',
         '&, &:hover': {
-            backgroundColor: theme.fn.lighten(
-                theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
-                0.15
-            ),
+            backgroundColor: '#FFF',
+            color: '#228BE6',
             [`& .${getStylesRef('icon')}`]: {
                 opacity: 0.9,
             },
@@ -94,7 +104,7 @@ export function Sidebar({ props }) {
     const [active, setActive] = useState('Billing');
     const navigate = useNavigate();
     const links = data.map((item) => (
-        <a style={{ display: visible ? 'block' : 'none' }}
+        <a style={{ display: visible ? 'block' : 'none', justifyContent: 'center', alignItems: 'center' }}
             className={cx(classes.link, { [classes.linkActive]: item.label === active })}
             href={item.link}
             key={item.label}
@@ -104,28 +114,23 @@ export function Sidebar({ props }) {
                 navigate(item.link);
             }}
         >
-            <item.icon className={classes.linkIcon} stroke={1.5} />
+            <item.icon className={cx({ [classes.linkActive]: item.label === active })} stroke={1.5} />
             <span>{item.label}</span>
         </a >
     ));
 
     return (
-        <Navbar style={{ width: '200px' }} height={visible ? '100vh' : '70px'} p="15px" className={classes.navbar}>
-            <Navbar.Section grow>
+        <Navbar style={{ width: '96px' }} height={visible ? '100vh' : '70px'} p="15px" className={classes.navbar}>
+            <Navbar.Section grow className="sidebar">
                 <Group className={classes.header} position="apart">
                     {/* <MantineLogo size={28} inverted /> */}
-                    <Code className={classes.version}>v0.0.1</Code>
-                    {/* button to hide navbar */}
-                    <Button variant={'light'} color={'white'} onClick={() => setVisible(!visible)}>
-                        Menu
-                    </Button>
+                    <div className="header">
+                        <div className="version">
+                            <div className="text-wrapper-2">v0.0.1</div>
+                        </div>
+                    </div>
                 </Group>
                 {links}
-            </Navbar.Section>
-            <Navbar.Section grow>
-                <Group>
-                    <div style={{ fontSize: '10px' }}>Contato <br />maycon.mota@ufms.br</div>
-                </Group>
             </Navbar.Section>
         </Navbar>
 
