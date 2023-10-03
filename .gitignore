@@ -5,6 +5,11 @@ scrapping_data\pmqc\*
 /*.pytest_cache
 *.csv
 scrapping_data\pmqc_processed\coletas.json
+<<<<<<< HEAD
 *coletas.json
 node_modules/*
 *.xlsx
+=======
+node_modules/*
+scrapping_data/levantamento_semanal_precos/*
+>>>>>>> main
