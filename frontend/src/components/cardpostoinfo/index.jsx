@@ -9,7 +9,7 @@ import infoPanelState from '../../atoms';
 
 const useStyles = createStyles((theme) => ({
     card: {
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+        // backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
     },
     cardPrimary: {
         backgroundColor: '#228be6',
@@ -86,14 +86,17 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
 
 
     const features = mockdata.map((feature) => (
-        <Center key={feature.title}>
-            <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} /> <br />
-            <Text size="xs"><strong>{feature.title}</strong> {feature.label}</Text>
-        </Center>
+        <div>
+            <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
+            {feature.title}:
+            <span fz="sm">
+                {' ' + feature.label}
+            </span>
+        </div>
     ));
 
     return (
-        <Card style={{ display: PanelState ? 'block' : 'none' }} withBorder radius="md">
+        <Card style={{ display: PanelState ? 'block' : 'none', position: 'absolute', top: '96px', right: 0, opacity: 0.89 }} withBorder radius="md">
             {// Botão para fechar o card
                 <Button
                     variant="outline"
@@ -105,31 +108,34 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                     }
                 >Fechar</Button>
             }
-            <Card.Section className={classes.imageSection} style={{ marginTop: '40px' }}>
-                <Image src="https://www.zuldigital.com.br/blog/wp-content/uploads/2020/09/shutterstock_339529217_Easy-Resize.com_.jpg" height={"200px"} />
-            </Card.Section>
-
             <Group position="apart" mt="md">
                 <div>
                     <h2 fw={900}>{infoPostoSelecionado && infoPostoSelecionado.RazaoSocialPosto}</h2>
-                    <small>{infoPostoSelecionado && infoPostoSelecionado.CnpjPosto}</small>
-                    <Text fz="xs" c="dimmed">
-                    </Text>
+                    <Badge color={'green'} variant="filled">{infoPostoSelecionado && infoPostoSelecionado.Distribuidora}</Badge>
                 </div>
-                <Badge color={'green'} variant="filled">{infoPostoSelecionado && infoPostoSelecionado.Distribuidora}</Badge>
             </Group>
+            <hr></hr>
 
+
+            <Group>
+                <Image src="https://www.zuldigital.com.br/blog/wp-content/uploads/2020/09/shutterstock_339529217_Easy-Resize.com_.jpg" height={"200px"} />
+            </Group>
             <Card.Section className={classes.section} mt="md">
                 <Text fz="sm" c="dimmed" className={classes.label}>
                     Sobre o posto
                 </Text>
 
                 <Group spacing={8} mb={-8}>
-                    {features}
+                    <div style={{ display: 'grid', width: '688px', gridAutoFlow: 'column', gridTemplateRows: '30px 30px 30px' }}>
+                        {features}
+                    </div>
                 </Group>
             </Card.Section>
 
-            <Card.Section mt="lg">
+            <Card.Section className={classes.section} mt="md">
+                <Text fz="sm" c="dimmed" className={classes.label}>
+                    Preços
+                </Text>
                 <Card withBorder className={classes.cardPrimary} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} radius="md" m="xl" p="xl" >
                     <div>
                         <Text fz="xs" tt="uppercase" fw={700}>
@@ -171,7 +177,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                     </Text>
                 }
             </Card.Section>
-        </Card>
+        </Card >
     );
 }
 
