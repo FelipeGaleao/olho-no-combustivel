@@ -7,3 +7,4 @@ scrapping_data\pmqc\*
 scrapping_data\pmqc_processed\coletas.json
 *coletas.json
 node_modules/*
+*.xlsx
