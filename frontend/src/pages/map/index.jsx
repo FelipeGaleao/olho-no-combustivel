@@ -43,8 +43,8 @@ const MapPage = () => {
     }, [])
 
     return (
-        <div style={{ display: 'flex' }}>
-            <Map height={'120vh'} defaultCenter={[-20.461016, -54.612236]} defaultZoom={11} onBoundsChanged={(e) => {
+        <div style={{ height: '100%', width: '100%' }}>
+            <Map defaultCenter={[-20.461016, -54.612236]} defaultZoom={11} onBoundsChanged={(e) => {
                 setLimitesMapa(e.center)
                 fetchPostosCombustiveis()
             }}>
@@ -64,9 +64,7 @@ const MapPage = () => {
                     ))
                 }
             </Map>
-            <div style={{ paddingTop: '5vh', paddingRight: '1.25vw', backgroundColor: 'white', wdith: "80vw" }}>
-                <CardPostoInfo infoPostoSelecionado={postoSelecionado} />
-            </div>
+            <CardPostoInfo infoPostoSelecionado={postoSelecionado} />
         </div>
     )
 }

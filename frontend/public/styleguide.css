@@ -1,0 +1,16 @@
+:root {
+    --neutrasbranco: rgba(255, 255, 255, 1);
+    --neutrascinza-300: rgba(241, 242, 245, 1);
+    --neutrascinza-500: rgba(150, 155, 171, 1);
+    --neutrascinza-600: rgba(137, 142, 147, 1);
+    --neutrascinza-800: rgba(111, 111, 111, 1);
+    --neutraspreto: rgba(0, 0, 0, 1);
+    --primriaazul-400: rgba(151, 153, 253, 1);
+    --primriaazul-500: rgba(34, 139, 230, 1);
+    --primriaazul-600: rgba(0, 0, 249, 1);
+    --secundriasverde-400: rgba(59, 219, 142, 1);
+    --secundriasverde-500: rgba(64, 197, 96, 1);
+    --secundriasverde-600: rgba(69, 219, 59, 1);
+    --secundriasvermelho-500: rgba(255, 0, 0, 1);
+  }
+  
