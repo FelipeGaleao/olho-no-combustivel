@@ -18,7 +18,7 @@ services:
     build:
       context: frontend
       dockerfile: Dockerfile
-    command: npm run dev --host
+    command: npm run publish
     volumes:
       - ./frontend/:/app
       - /app/node_modules
