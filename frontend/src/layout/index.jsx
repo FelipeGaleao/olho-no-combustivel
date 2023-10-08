@@ -13,6 +13,7 @@ import { Sidebar } from '../components/sidebar';
 import { Outlet } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { sidebarState } from '../atoms';
+import ReactGA from "react-ga4";
 
 export default function AppShellDemo() {
     const theme = useMantineTheme();
@@ -28,7 +29,7 @@ export default function AppShellDemo() {
             }}
             aside={
                 <MediaQuery smallerThan="sm" >
-                    <Sidebar style={{ display: sidebarOpened ? 'block' : 'none' }} />
+                    <Sidebar style={{ display: sidebarOpened ? 'block' : 'none', transition: '2s' }} />
                 </MediaQuery>
             }
             header={
@@ -41,9 +42,21 @@ export default function AppShellDemo() {
                                 opened={
                                     sidebarOpened
                                 }
-                                onClick={() => setSidebarState(!sidebarOpened)}
+                                onClick={
+                                    () => {
+                                        setSidebarState(!sidebarOpened)
+                                        ReactGA.event({
+                                            category: 'Funcionalidades',
+                                            action: 'Sidebar',
+                                            label: sidebarOpened ? 'Fechada' : 'Aberta',
+                                            value: 1
+                                        });
+                                    }
+
+                                }
                                 size="sm"
-                                color={theme.colors.gray[6]}
+                                color={'white'}
+
                             />
                         </MediaQuery>
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center', width: '100%', height: '100%' }}>
