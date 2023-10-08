@@ -5,4 +5,8 @@ const infoPanelState = atom({
     default: false,
 });
 
-export default infoPanelState;
+const sidebarState = atom({
+    key: 'sidebarState',
+    default: false,
+});
+export { infoPanelState, sidebarState };
