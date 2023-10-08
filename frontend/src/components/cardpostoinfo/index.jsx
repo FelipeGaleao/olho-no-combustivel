@@ -4,7 +4,7 @@ import { TabelaColeta } from './tabelaColeta';
 import { api } from "../../services/api";
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
-import infoPanelState from '../../atoms';
+import { infoPanelState } from '../../atoms';
 
 
 const useStyles = createStyles((theme) => ({
@@ -14,6 +14,7 @@ const useStyles = createStyles((theme) => ({
     cardPrimary: {
         backgroundColor: '#228be6',
         color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.white,
+        padding: '15px'
     },
     imageSection: {
         padding: theme.spacing.md,
@@ -25,8 +26,6 @@ const useStyles = createStyles((theme) => ({
     },
 
     label: {
-        marginBottom: theme.spacing.xs,
-        lineHeight: 1,
         fontWeight: 700,
         fontSize: theme.fontSizes.xs,
         letterSpacing: rem(-0.25),
@@ -115,8 +114,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
     ));
 
     return (
-        <Card style={{ display: PanelState ? 'block' : 'none', position: 'absolute', top: '64px', right: 0, opacity: 0.89, width: '720px', height: '90%', overflow: 'auto' }} withBorder radius="md">
-
+        <Card style={{ display: PanelState ? 'block' : 'none' }} className={'card-info-posto'} withBorder radius="md">
             {// Botão para fechar o card
                 <Button
                     variant="outline"
@@ -146,7 +144,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                 </Text>
 
                 <Group spacing={8} mb={-8}>
-                    <div style={{ display: 'grid', width: '688px', gridAutoFlow: 'column', gridTemplateRows: '30px 30px 30px' }}>
+                    <div style={{ display: 'grid', width: '688px', gridGap: '1.5rem', gridAutoFlow: 'column', gridTemplateRows: '30px 30px 30px' }}>
                         {features}
                     </div>
                 </Group>
@@ -247,6 +245,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
             </Card.Section>
         </Card >
     );
+
 }
 
 export default CardPostoInfo;
