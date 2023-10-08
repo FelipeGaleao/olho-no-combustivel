@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { CardPostoInfo } from "../../components/cardpostoinfo"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 import { infoPanelState } from "../../atoms"
+import ReactGA from "react-ga4";
 
 const MapPage = () => {
     const [postos, setPostos] = useState([])
@@ -57,7 +58,7 @@ const MapPage = () => {
     return (
         <div style={{ height: '100%', width: '100vw' }}>
             <Map center={posicaoAtual ? posicaoAtual : [-20.461016, -54.6122]}
-                defaultZoom={18} onBoundsChanged={(e) => {
+                defaultZoom={14} onBoundsChanged={(e) => {
                     setLimitesMapa(e.center)
                     fetchPostosCombustiveis()
                 }}>
@@ -88,6 +89,30 @@ const MapPage = () => {
                                     posto.situacaoPainel = true
                                     PanelState ? setInfoPanelState(true) : setInfoPanelState(true)
                                     setPostoSelecionado(posto)
+                                    ReactGA.event({
+                                        category: 'Postos (CNPJ)',
+                                        action: 'Visualização de posto',
+                                        label: posto.CnpjPosto,
+                                        value: 1
+                                    });
+                                    ReactGA.event({
+                                        category: 'Postos (Razão Social)',
+                                        action: 'Visualização de posto',
+                                        label: posto.RazaoSocialPosto,
+                                        value: 1
+                                    });
+                                    ReactGA.event({
+                                        category: 'Postos',
+                                        action: 'Visualização de posto',
+                                        label: posto.Município + ' - ' + posto.Uf,
+                                        value: 1
+                                    });
+                                    ReactGA.event({
+                                        category: 'Postos',
+                                        action: 'Visualização de posto',
+                                        label: posto.Bairro + ', ' + posto.Município + ' - ' + posto.Uf,
+                                        value: 1
+                                    });
                                 }
                             }>
 

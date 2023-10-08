@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import {
   RecoilRoot,
   atom,
@@ -17,6 +17,7 @@ import MapPage from "./pages/map";
 
 
 const App = () => {
+
   return (
     <RecoilRoot>
       <BrowserRouter>

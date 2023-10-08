@@ -1,5 +1,6 @@
 import { createStyles, Table, SegmentedControl, Progress, Anchor, Text, Group, ScrollArea, rem, TextInput } from '@mantine/core';
 import { useState } from 'react';
+import ReactGA from "react-ga4";
 
 const useStyles = createStyles((theme) => ({
     progressBar: {
@@ -100,6 +101,12 @@ export function TabelaColeta({ data }) {
                             const coletasFiltradas = todasColetas.filter((row) => row.Produto === produto)
                             setColetas(coletasFiltradas)
                         }
+                        ReactGA.event({
+                            category: 'Funcionalidades',
+                            action: 'Filtro de produto',
+                            label: value.target.value,
+                            value: 1
+                        });
                     }}
                 />
             </div>
