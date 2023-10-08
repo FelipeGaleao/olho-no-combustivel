@@ -89,39 +89,45 @@ const MapPage = () => {
                 { // if postos is not empty render markers 
                     postos && postos.map(posto => (
 
-                        <Marker offset={[10, 30]} key={posto.CnpjPosto} position={[posto.Latitude, posto.Longitude]} eventHandlers={{
-                            // show posto name on click and set situacaoPainel 
-                            click: () => {
-                                posto.situacaoPainel = true
-                                PanelState ? setInfoPanelState(true) : setInfoPanelState(true)
-                                setPostoSelecionado(posto)
-                                ReactGA.event({
-                                    category: 'Postos (CNPJ)',
-                                    action: 'Visualização de posto',
-                                    label: posto.CnpjPosto,
-                                    value: 1
-                                });
-                                ReactGA.event({
-                                    category: 'Postos (Razão Social)',
-                                    action: 'Visualização de posto',
-                                    label: posto.RazaoSocialPosto,
-                                    value: 1
-                                });
-                                ReactGA.event({
-                                    category: 'Postos',
-                                    action: 'Visualização de posto',
-                                    label: 'Cidade',
-                                    value: 1
-                                });
-                                ReactGA.event({
-                                    category: 'Postos',
-                                    action: 'Visualização de posto',
-                                    label: posto.Bairro + ', ' + posto.Município + ' - ' + posto.Uf,
-                                    value: 1
-                                });
+                        <Marker key={posto.CnpjPosto} position={[posto.Latitude, posto.Longitude]}
+                            icon={
+                                L.divIcon({
+                                    html: `<img src="https://www.olhonocombustivel.com/images/marker-icon.png">`,
+                                })
                             }
-                        }}>
-                            <Tooltip minZoom={12} maxZoom={16} offset={[0, 20]} style={{ color: 'white', backgroundColor: 'none' }} permanent>
+                            eventHandlers={{
+                                // show posto name on click and set situacaoPainel 
+                                click: () => {
+                                    posto.situacaoPainel = true
+                                    PanelState ? setInfoPanelState(true) : setInfoPanelState(true)
+                                    setPostoSelecionado(posto)
+                                    ReactGA.event({
+                                        category: 'Postos (CNPJ)',
+                                        action: 'Visualização de posto',
+                                        label: posto.CnpjPosto,
+                                        value: 1
+                                    });
+                                    ReactGA.event({
+                                        category: 'Postos (Razão Social)',
+                                        action: 'Visualização de posto',
+                                        label: posto.RazaoSocialPosto,
+                                        value: 1
+                                    });
+                                    ReactGA.event({
+                                        category: 'Postos',
+                                        action: 'Visualização de posto',
+                                        label: 'Cidade',
+                                        value: 1
+                                    });
+                                    ReactGA.event({
+                                        category: 'Postos',
+                                        action: 'Visualização de posto',
+                                        label: posto.Bairro + ', ' + posto.Município + ' - ' + posto.Uf,
+                                        value: 1
+                                    });
+                                }
+                            }}>
+                            <Tooltip minZoom={12} maxZoom={16} offset={[30, 20]} style={{ color: 'white', backgroundColor: 'transparent' }} permanent>
                                 <div style={{
                                     display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', color: 'white',
                                     alignItems: 'center', padding: '10px', borderRadius: '16px', backgroundColor: '#228be6', fontSize: '10px',
