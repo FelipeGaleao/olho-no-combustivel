@@ -22,7 +22,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<MapPage />} />
             <Route path="/map" element={<MapPage />} />
           </Route>
         </Routes>

@@ -2,7 +2,7 @@ from fastapi import APIRouter
 import os
 import json
 from typing import Union
-
+from datetime import datetime
 router = APIRouter()
 
 
@@ -32,6 +32,8 @@ async def get_postos(
         page = int(page)
 
     json_postos = json.load(open("/code/app/data/postos.json", "r", encoding="utf8"))
+    json_precos = json.load(open("/code/app/data/precos.json", "r", encoding="utf8"))
+    
     # query json to get all postos from Uf
     postos = []
     for posto in json_postos:
@@ -47,7 +49,45 @@ async def get_postos(
                         (float(posto["Latitude"]) - float(Latitude)) ** 2
                         + (float(posto["Longitude"]) - float(Longitude)) ** 2
                     ) ** 0.5
-                    if distancia < 0.3:
+                    if distancia < 0.08:
+                        # get precos
+                        for preco in json_precos:
+                            # get date of price and format to datetime dd/MM/yyyy HH:mm
+                            # if preco["cnpj"] == posto["CnpjPosto"]:
+                            #     posto["data_coleta"] = datetime.strptime(
+                            #         preco["data_coleta"], "%Y-%m-%d %H:%M:%S"
+                            #     ).strftime("%d/%m/%Y %H:%M")
+                            #     # get price for gasolina
+                            #     if preco["produto"] == "GASOLINA COMUM":
+                            #         posto["preco_gasolina"] = preco["preco"]
+                            #         continue
+                            #     # get price for diesel
+                            #     if preco["produto"] == "DIESEL S500":
+                            #         posto["preco_diesel"] = preco["preco"]
+                            #         continue
+                            #     # get price for etanol
+                            #     if preco["produto"] == "ETANOL":
+                            #         posto["preco_etanol"] = preco["preco"]
+                            #         continue
+
+                            # get lastest data_coleta for posto and return preco of GASOLINA COMUM
+                            if preco["cnpj"] == posto["CnpjPosto"]:
+                                posto["data_coleta"] = datetime.strptime(
+                                    preco["data_coleta"], "%Y-%m-%d %H:%M:%S"
+                                ).strftime("%d/%m/%Y %H:%M")
+                                # get price for gasolina
+                                if preco["produto"] == "GASOLINA COMUM":
+                                    posto["preco_gasolina"] = preco["preco"]
+                                    break
+                                # get price for diesel
+                                if preco["produto"] == "DIESEL S500":
+                                    posto["preco_diesel"] = preco["preco"]
+                                    break
+                                # get price for etanol
+                                if preco["produto"] == "ETANOL":
+                                    posto["preco_etanol"] = preco["preco"]
+                                    break
+
                         postos_encontrados.append(posto)
             return postos_encontrados
 

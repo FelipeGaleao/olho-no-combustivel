@@ -4,7 +4,7 @@ import { TabelaColeta } from './tabelaColeta';
 import { api } from "../../services/api";
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
-import infoPanelState from '../../atoms';
+import { infoPanelState } from '../../atoms';
 
 
 const useStyles = createStyles((theme) => ({
@@ -14,6 +14,10 @@ const useStyles = createStyles((theme) => ({
     cardPrimary: {
         backgroundColor: '#228be6',
         color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.white,
+        padding: '15px',
+        borderRadius: '16px',
+        marginLeft: '24px',
+        minWidth: '100px',
     },
     imageSection: {
         padding: theme.spacing.md,
@@ -25,8 +29,6 @@ const useStyles = createStyles((theme) => ({
     },
 
     label: {
-        marginBottom: theme.spacing.xs,
-        lineHeight: 1,
         fontWeight: 700,
         fontSize: theme.fontSizes.xs,
         letterSpacing: rem(-0.25),
@@ -37,6 +39,7 @@ const useStyles = createStyles((theme) => ({
         padding: theme.spacing.md,
         borderTop: `${rem(1)} solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
             }`,
+
     },
 
     icon: {
@@ -105,9 +108,13 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
 
 
     const features = mockdata.map((feature) => (
-        <div>
+        <div style={{
+            marginTop: '20px',
+            margin: '10px 0px'
+
+        }}>
             <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
-            {feature.title}:
+            <span>{feature.title}:</span>
             <span fz="sm">
                 {' ' + feature.label}
             </span>
@@ -115,8 +122,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
     ));
 
     return (
-        <Card style={{ display: PanelState ? 'block' : 'none', position: 'absolute', top: '64px', right: 0, opacity: 0.89, width: '720px', height: '90%', overflow: 'auto' }} withBorder radius="md">
-
+        <Card style={{ display: PanelState ? 'block' : 'none' }} className={'card-info-posto'} withBorder radius="lg">
             {// Botão para fechar o card
                 <Button
                     variant="outline"
@@ -145,35 +151,36 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                     Sobre o posto
                 </Text>
 
-                <Group spacing={8} mb={-8}>
-                    <div style={{ display: 'grid', width: '688px', gridAutoFlow: 'column', gridTemplateRows: '30px 30px 30px' }}>
+                <Group>
+                    <div style={{ display: 'grid', width: '688px', gridGap: '1px', gridAutoFlow: 'column', gridTemplateRows: '30px 30px 30px' }}>
                         {features}
                     </div>
                 </Group>
             </Card.Section>
 
-            <Card.Section className={classes.section} mt="md">
-                <Text fz="sm" c="dimmed" className={classes.label}>
+            <Card.Section mt="md">
+                <Text p="xl" fz="sm" c="dimmed" className={classes.label}>
                     Preços
                 </Text>
-                <Card withBorder className={classes.cardPrimary} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} radius="md" m="xl" p="xl" >
-                    <div>
+                <Card style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', overflow: 'auto', maxWidth: '100%' }} >
+                    <div withBorder className={classes.cardPrimary} radius="lg" m="xl" p="xl" >
                         <Text fz="xs" tt="uppercase" fw={700}>
                             Gasolina
                         </Text>
-                        <Text fz="lg" fw={500}>
+                        <Text fz="sm" fw={500}>
                             R$ {getPrecos(precos, 'GASOLINA COMUM')}
                             {
                                 precos && precos.map((preco) => (
                                     <div>
                                         {preco.produto === 'GASOLINA COMUM' ? <Text fz="xs" tt="uppercase" fw={700}>
-                                            {
-                                                new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
-                                                    day: '2-digit',
-                                                    month: '2-digit',
-                                                    year: 'numeric'
-                                                })
-                                            } - R$ {preco.preco}
+                                            <span style={{ fontSize: '10px', fontWeight: '300' }}>
+                                                {
+                                                    new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
+                                                        day: '2-digit',
+                                                        month: '2-digit',
+                                                        year: 'numeric'
+                                                    })
+                                                } - R$ {preco.preco} </span>
                                         </Text> : <></>}
                                     </div>
                                 ))
@@ -181,7 +188,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                             }
                         </Text>
                     </div>
-                    <div>
+                    <div withBorder className={classes.cardPrimary} radius="lg" m="xl" p="xl" >
                         <Text fz="xs" tt="uppercase" fw={700}>
                             Álcool
                         </Text>
@@ -191,13 +198,14 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                                 precos && precos.map((preco) => (
                                     <div>
                                         {preco.produto === 'ETANOL' ? <Text fz="xs" tt="uppercase" fw={700}>
-                                            {
-                                                new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
-                                                    day: '2-digit',
-                                                    month: '2-digit',
-                                                    year: 'numeric'
-                                                })
-                                            } - R$ {preco.preco}
+                                            <span style={{ fontSize: '10px', fontWeight: '300' }}>
+                                                {
+                                                    new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
+                                                        day: '2-digit',
+                                                        month: '2-digit',
+                                                        year: 'numeric'
+                                                    })
+                                                } - R$ {preco.preco} </span>
                                         </Text> : <></>}
                                     </div>
                                 ))
@@ -205,7 +213,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                             }
                         </Text>
                     </div>
-                    <div>
+                    <div withBorder className={classes.cardPrimary} radius="lg" m="xl" p="xl" >
                         <Text fz="xs" tt="uppercase" fw={700}>
                             Diesel
                         </Text>
@@ -215,13 +223,14 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                                 precos && precos.map((preco) => (
                                     <div>
                                         {preco.produto === 'DIESEL S500' ? <Text fz="xs" tt="uppercase" fw={700}>
-                                            {
-                                                new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
-                                                    day: '2-digit',
-                                                    month: '2-digit',
-                                                    year: 'numeric'
-                                                })
-                                            } - R$ {preco.preco}
+                                            <span style={{ fontSize: '10px', fontWeight: '300' }}>
+                                                {
+                                                    new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
+                                                        day: '2-digit',
+                                                        month: '2-digit',
+                                                        year: 'numeric'
+                                                    })
+                                                } - R$ {preco.preco} </span>
                                         </Text> : <></>}
                                     </div>
                                 ))
@@ -247,6 +256,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
             </Card.Section>
         </Card >
     );
+
 }
 
 export default CardPostoInfo;
