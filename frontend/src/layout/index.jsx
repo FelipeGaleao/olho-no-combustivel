@@ -11,24 +11,24 @@ import {
 } from '@mantine/core';
 import { Sidebar } from '../components/sidebar';
 import { Outlet } from 'react-router-dom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { sidebarState } from '../atoms';
 
 export default function AppShellDemo() {
     const theme = useMantineTheme();
-    const [opened, setOpened] = useState(false);
+    const [sidebarOpened, setSidebarState] = useRecoilState(sidebarState);
     return (
         <AppShell
             styles={{
+                paddingLeft: 0,
                 main: {
                     padding: 0,
                     background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
                 },
             }}
-            navbarOffsetBreakpoint="sm"
             aside={
                 <MediaQuery smallerThan="sm" >
-                    <Aside width={{ sm: '100%', lg: 0 }}>
-                        <Sidebar />
-                    </Aside>
+                    <Sidebar style={{ display: sidebarOpened ? 'block' : 'none' }} />
                 </MediaQuery>
             }
             header={
@@ -36,18 +36,18 @@ export default function AppShellDemo() {
                     style={{ backgroundColor: '#228be6', borderBottom: 'none' }}
                 >
                     <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-                        <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+                        <MediaQuery styles={{ display: 'block' }}>
                             <Burger
-                                opened={opened}
-                                onClick={() => setOpened((o) => !o)}
+                                opened={
+                                    sidebarOpened
+                                }
+                                onClick={() => setSidebarState(!sidebarOpened)}
                                 size="sm"
                                 color={theme.colors.gray[6]}
-                                mr="xl"
                             />
                         </MediaQuery>
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center', width: '100%', height: '100%' }}>
                             <Text><strong>Olho no Combustível</strong></Text>
-
                         </div>
                     </div>
                 </Header>

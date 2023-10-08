@@ -3,7 +3,8 @@ import { createStyles, Divider, Button, Navbar, Group, Code, getStylesRef, rem }
 import { useNavigate } from "react-router-dom";
 import "../../../public/style.css";
 import "../../../public/styleguide.css";
-
+import { useRecoilState } from 'recoil';
+import { sidebarState } from '../../atoms';
 import {
     IconMap2,
     IconHome,
@@ -14,36 +15,23 @@ import {
 const useStyles = createStyles((theme) => ({
     navbar: {
         padding: 0,
-        borderColor: theme.colors.gray[2],
-        borderRightWidth: 1,
-        backgroundColor: theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
+        border: 'none',
     },
 
     version: {
-        backgroundColor: theme.fn.lighten(
-            theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
-            0.1
-        ),
         color: theme.white,
         fontWeight: 700,
     },
 
     header: {
         paddingBottom: theme.spacing.md,
-        marginBottom: `calc(${theme.spacing.md} * 1.5)`,
-        borderBottom: `${rem(1)} solid ${theme.fn.lighten(
-            theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
-            0.1
-        )}`,
+        border: 0,
+        marginBottom: `calc(${theme.spacing.md} * 1.5)`
     },
 
     footer: {
         paddingTop: theme.spacing.md,
-        marginTop: theme.spacing.md,
-        borderTop: `${rem(1)} solid ${theme.fn.lighten(
-            theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
-            0.1
-        )}`,
+        marginTop: theme.spacing.md
     },
 
     link: {
@@ -100,11 +88,12 @@ const data = [
 
 export function Sidebar({ props }) {
     const { classes, cx } = useStyles();
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useRecoilState(sidebarState);
+
     const [active, setActive] = useState('Billing');
     const navigate = useNavigate();
     const links = data.map((item) => (
-        <a style={{ display: visible ? 'block' : 'none', justifyContent: 'center', alignItems: 'center' }}
+        <a style={{ display: visible ? 'flex' : 'none', marginLeft: 'auto', marginRight: 'auto', paddingLeft: '15px', flexDirection: 'column' }}
             className={cx(classes.link, { [classes.linkActive]: item.label === active })}
             href={item.link}
             key={item.label}
@@ -120,13 +109,13 @@ export function Sidebar({ props }) {
     ));
 
     return (
-        <Navbar style={{ width: '96px' }} height={visible ? '100vh' : '70px'} p="15px" className={classes.navbar}>
+        <Navbar style={{ width: '96px', display: visible ? 'block' : 'none' }} height={visible ? '100vh' : '0px'}>
             <Navbar.Section grow className="sidebar">
                 <Group className={classes.header} position="apart">
                     {/* <MantineLogo size={28} inverted /> */}
                     <div className="header">
                         <div className="version">
-                            <div className="text-wrapper-2">v0.0.1</div>
+                            <a>v0.0.1</a>
                         </div>
                     </div>
                 </Group>
