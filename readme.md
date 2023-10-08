@@ -1,6 +1,6 @@
-# De olho no combustivel
+# [De olho no combustivel](https://www.olhonocombustivel.com)
 
-<img src="./screenshots/127.0.0.1_5173_map.png">
+<img src="./screenshots/127.0.0.1_5173_map.png" width="100px">
 
 Você já se perguntou se o posto de combustível que você abastece possui uma qualidade de combustível boa? Ou se o preço que você paga é justo? Ou ainda, se o posto que você abastece é confiável?
 Pensando nisso, resolvi elaborar o projeto "De olho no combustível", que tem como objetivo coletar dados de postos de combustível e disponibilizar para o usuário de forma simples e intuitiva.
