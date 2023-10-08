@@ -122,7 +122,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
     ));
 
     return (
-        <Card style={{ display: PanelState ? 'block' : 'none' }} className={'card-info-posto'} withBorder radius="lg">
+        <Card style={{ display: PanelState ? 'block' : 'none', zIndex: 10 }} className={'card-info-posto'} withBorder radius="lg">
             {// Botão para fechar o card
                 <Button
                     variant="outline"

@@ -6,6 +6,8 @@ import ReactGA from "react-ga4";
 
 ReactGA.initialize("G-V8GQHHTLPC");
 
+
+
 // ReactGA.initialize("your GA measurement id");
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
