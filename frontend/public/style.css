@@ -38,14 +38,22 @@
   }
   .card-info-posto {
     position: absolute;
+    overflow: auto;
+    max-height: 80%;
     top: 64px;
     right: 0;
     width: 720px;
-    height: 90%;
-    overflow: 'auto'; 
     } 
     @media (max-width: 768px){
         .card-info-posto {
-            width: 100%;
+            width: 90vw;
+            position: absolute;
+            overflow: auto;
+            max-height: 80%;
+            /* force all font size to be 10px */
+            font-size: 11px;
+            right: 20px;
+            bottom: 10px;
         }
+    
     }
