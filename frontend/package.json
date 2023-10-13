@@ -41,7 +41,9 @@
         "react-leaflet": "^4.2.1",
         "react-router-dom": "^6.14.2",
         "recoil": "^0.7.7",
-        "sort-by": "^1.2.0"
+        "sort-by": "^1.2.0",
+        "vite-plugin-radar": "^0.9.1"
+
     },
     "devDependencies": {
         "@types/react": "^18.2.15",
