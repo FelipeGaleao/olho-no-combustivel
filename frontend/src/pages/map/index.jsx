@@ -39,6 +39,7 @@ const MapPage = () => {
 
     const fetchPostosCombustiveis = async () => {
         let postos = []
+        // check if map view is above 16
         await api.get('/postos/', {
             params: {
                 Latitude: limitesMapa[0],
