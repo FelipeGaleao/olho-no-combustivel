@@ -108,13 +108,9 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
 
 
     const features = mockdata.map((feature) => (
-        <div style={{
-            marginTop: '20px',
-            margin: '10px 0px'
-
-        }}>
+        <div >
             <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
-            <span>{feature.title}:</span>
+            <span style={{ color: 'gray', fontWeight: 500 }}>{feature.title}:</span>
             <span fz="sm">
                 {' ' + feature.label}
             </span>
@@ -122,23 +118,21 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
     ));
 
     return (
-        <Card style={{ display: PanelState ? 'block' : 'none', zIndex: 10 }} className={'card-info-posto'} withBorder radius="lg">
-            {// Botão para fechar o card
-                <Button
-                    variant="outline"
-                    color="blue"
-                    style={{ position: 'absolute', right: '0px', margin: '10px', zIndex: 9999 }}
-                    onClick={() => {
-                        setInfoPanelState(!PanelState)
-                    }
-                    }
-                >Fechar</Button>
-            }
+        <Card style={{ display: PanelState ? 'block' : 'none', zIndex: 10, padding: '30px', paddingLeft: '30px' }} className={'card-info-posto'} withBorder radius="lg">
             <Group position="apart" mt="md">
                 <div>
                     <h2 fw={900}>{infoPostoSelecionado && infoPostoSelecionado.RazaoSocialPosto}</h2>
                     <Badge color={'green'} variant="filled">{infoPostoSelecionado && infoPostoSelecionado.Distribuidora}</Badge>
                 </div>
+                <Button
+                    variant="filled"
+                    color="blue"
+                    style={{ position: 'absolute', right: '10px', top: '10px', zIndex: 9999 }}
+                    onClick={() => {
+                        setInfoPanelState(!PanelState)
+                    }
+                    }
+                >Fechar</Button>
             </Group>
             <hr></hr>
 
@@ -152,7 +146,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                 </Text>
 
                 <Group>
-                    <div style={{ display: 'grid', width: '688px', gridGap: '1px', gridAutoFlow: 'column', gridTemplateRows: '30px 30px 30px' }}>
+                    <div style={{ display: 'grid', width: '688px', gridGap: '1px', gridAutoFlow: 'column', gridTemplateRows: '1.4rem 1.4rem 1.4rem 1.4rem' }}>
                         {features}
                     </div>
                 </Group>
@@ -162,7 +156,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                 <Text p="xl" fz="sm" c="dimmed" className={classes.label}>
                     Preços
                 </Text>
-                <Card style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', overflow: 'auto', maxWidth: '100%' }} >
+                <Card style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', overflow: 'auto', maxWidth: '100%', marginRight: '20px' }} >
                     <div withBorder className={classes.cardPrimary} radius="lg" m="xl" p="xl" >
                         <Text fz="xs" tt="uppercase" fw={700}>
                             Gasolina
