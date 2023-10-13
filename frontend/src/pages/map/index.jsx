@@ -20,6 +20,7 @@ const MapPage = () => {
     const setInfoPanelState = useSetRecoilState(infoPanelState);
     const [posicaoAtual, setPosicaoAtual] = useState([-20.461016, -54.6122])
     const [bounds, setBounds] = useState(null);
+    const [moved, setMoved] = useState(false);
 
     const getCurrentLocation = () => {
         if (navigator.geolocation) {
@@ -75,23 +76,41 @@ const MapPage = () => {
             setLimitesMapa([map.getCenter().lat, map.getCenter().lng])
             fetchPostosCombustiveis()
         })
+        useMapEvent('created', () => {
+            // show the coordinates
+            map.setView(posicaoAtual[0], posicaoAtual[1])
+        })
     }
+
+
     return (
         <div style={{ height: '100vh', width: '100vw' }}>
-            <MapContainer style={{ height: '100vh', width: '100vw', zIndex: 1 }} center={posicaoAtual ? posicaoAtual : [-20.461016, -54.6122]} zoom={18} scrollWheelZoom={true}>
+            <MapContainer style={{ height: '100vh', width: '100vw', zIndex: 1 }} center={posicaoAtual}
+                zoom={18} scrollWheelZoom={true}>
                 <MapController />
 
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker key={'posicaoAtual'} position={posicaoAtual} />
+                <Marker key={'posicaoAtual'} icon={
+                    L.divIcon({
+                        className: 'custom-div-icon-marker',
+                        html: `<img width="40" height="40" src="https://img.icons8.com/ultraviolet/40/car.png" alt="car"/>`,
+                    })
+                }
+                    position={posicaoAtual}>
+                    <Tooltip offset={[15, 5]} className="tooltip-content-success" permanent>
+                        Você está aqui!
+                    </Tooltip>
+                </Marker>
                 { // if postos is not empty render markers 
                     postos && postos.map(posto => (
 
                         <Marker key={posto.CnpjPosto} position={[posto.Latitude, posto.Longitude]}
                             icon={
                                 L.divIcon({
+                                    className: 'custom-div-icon-marker',
                                     html: `<img src="https://www.olhonocombustivel.com/images/marker-icon.png">`,
                                 })
                             }
@@ -103,55 +122,46 @@ const MapPage = () => {
                                     setPostoSelecionado(posto)
                                     ReactGA.event({
                                         category: 'Postos (CNPJ)',
-                                        action: 'Visualização de posto',
+                                        action: 'Visualização de posto (CNPJ)',
                                         label: posto.CnpjPosto,
                                         value: 1
                                     });
                                     ReactGA.event({
                                         category: 'Postos (Razão Social)',
-                                        action: 'Visualização de posto',
+                                        action: 'Visualização de posto (Razão Social)',
                                         label: posto.RazaoSocialPosto,
                                         value: 1
                                     });
                                     ReactGA.event({
                                         category: 'Postos',
-                                        action: 'Visualização de posto',
+                                        action: 'Visualização de posto (Cidade)',
                                         label: 'Cidade',
                                         value: 1
                                     });
                                     ReactGA.event({
                                         category: 'Postos',
-                                        action: 'Visualização de posto',
+                                        action: 'Visualização de posto (Endereço)',
                                         label: posto.Bairro + ', ' + posto.Município + ' - ' + posto.Uf,
                                         value: 1
                                     });
                                 }
                             }}>
-                            <Tooltip minZoom={12} maxZoom={16} offset={[30, 20]} style={{ color: 'white', backgroundColor: 'transparent' }} permanent>
-                                <div style={{
-                                    display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', color: 'white',
-                                    alignItems: 'center', padding: '10px', borderRadius: '16px', backgroundColor: '#228be6', fontSize: '10px',
-                                }}>
-                                    <span><b>{posto.RazaoSocialPosto}</b></span>
-                                    <span>{posto.Distribuidora}</span>
-                                    <div>
-                                        {posto.preco_gasolina ? `G: R$ ${posto.preco_gasolina} ` : ''}
-                                        {posto.preco_etanol ? `E: R$ ${posto.preco_etanol} ` : ''}
-                                        {posto.preco_diesel ? `D: R$ ${posto.preco_diesel}` : ''}
-                                    </div>
-                                    {posto.data_coleta ? `Atualizado em: ${posto.data_coleta}` : ''}
+                            <Tooltip offset={[30, 20]} className="tooltip-content" permanent>
+                                <span><b>{posto.RazaoSocialPosto}</b></span>
+                                <span>{posto.Distribuidora}</span>
+                                <div>
+                                    {posto.preco_gasolina ? `G: R$ ${posto.preco_gasolina} ` : ''}
+                                    {posto.preco_etanol ? `E: R$ ${posto.preco_etanol} ` : ''}
+                                    {posto.preco_diesel ? `D: R$ ${posto.preco_diesel}` : ''}
                                 </div>
+                                {posto.data_coleta ? `Atualizado em: ${posto.data_coleta}` : ''}
                             </Tooltip>
                         </Marker>
 
                     ))
                 }
 
-                <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
+
             </MapContainer>
             <CardPostoInfo style={{ zIndex: 10 }} infoPostoSelecionado={postoSelecionado} />
         </div >
