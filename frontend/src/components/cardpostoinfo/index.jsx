@@ -97,7 +97,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
             return precos[0].preco
         }
         else {
-            return 'Não encontrado'
+            return ' - '
         }
     }
 
@@ -108,7 +108,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
 
 
     const features = mockdata.map((feature) => (
-        <div >
+        <div style={{ marginTop: '8px' }} >
             <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
             <span style={{ color: 'gray', fontWeight: 500 }}>{feature.title}:</span>
             <span fz="sm">
@@ -118,136 +118,64 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
     ));
 
     return (
-        <Card style={{ display: PanelState ? 'block' : 'none', zIndex: 10, padding: '30px', paddingLeft: '30px' }} className={'card-info-posto'} withBorder radius="lg">
-            <Group position="apart" mt="md">
+        <Card style={{ display: PanelState ? 'grid' : 'none', zIndex: 10 }} className={'card-info-posto'} withBorder radius="lg">
+            <div className='info-title'>
+                <h2 style={{ height: '24px', }} fw={700}>{infoPostoSelecionado && infoPostoSelecionado.RazaoSocialPosto}</h2>
+                <Badge style={{ width: '300px' }} color={'green'} variant="filled">{infoPostoSelecionado && infoPostoSelecionado.Distribuidora}</Badge>
+                <div className="divider"> </div>
+            </div>
+            <div className='info-img-posto' >
+                <img className="img-posto" src="https://i0.wp.com/www.jmpostos.com.br/wp-content/uploads/2021/02/shell.jpg?fit=700%2C450"></img>
+            </div>
+            <div className="info-detalhes-postos">
                 <div>
-                    <h2 fw={900}>{infoPostoSelecionado && infoPostoSelecionado.RazaoSocialPosto}</h2>
-                    <Badge color={'green'} variant="filled">{infoPostoSelecionado && infoPostoSelecionado.Distribuidora}</Badge>
+                    SOBRE O POSTO
                 </div>
-                <Button
-                    variant="filled"
-                    color="blue"
-                    style={{ position: 'absolute', right: '10px', top: '10px', zIndex: 9999 }}
-                    onClick={() => {
-                        setInfoPanelState(!PanelState)
-                    }
-                    }
-                >Fechar</Button>
-            </Group>
-            <hr></hr>
+                <div class="info-detalhes-postos-content">
+                    {features}
+                </div>
+            </div>
+            <div className="info-precos-postos">
+                <div style={{ position: 'absolute', top: '510px', height: '15px' }}>
+                    PREÇOS
+                </div>
+                <div className="gasolina">
+                    <div className="text-wrapper">
+                        R$ {getPrecos(precos, 'GASOLINA COMUM')}
 
-
-            <Group>
-                <Image src="https://www.zuldigital.com.br/blog/wp-content/uploads/2020/09/shutterstock_339529217_Easy-Resize.com_.jpg" height={"200px"} />
-            </Group>
-            <Card.Section className={classes.section} mt="md">
-                <Text fz="sm" c="dimmed" className={classes.label}>
-                    Sobre o posto
-                </Text>
-
-                <Group>
-                    <div style={{ display: 'grid', width: '688px', gridGap: '1px', gridAutoFlow: 'column', gridTemplateRows: '1.4rem 1.4rem 1.4rem 1.4rem' }}>
-                        {features}
                     </div>
-                </Group>
-            </Card.Section>
-
-            <Card.Section mt="md">
-                <Text p="xl" fz="sm" c="dimmed" className={classes.label}>
-                    Preços
-                </Text>
-                <Card style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', overflow: 'auto', maxWidth: '100%', marginRight: '20px' }} >
-                    <div withBorder className={classes.cardPrimary} radius="lg" m="xl" p="xl" >
-                        <Text fz="xs" tt="uppercase" fw={700}>
-                            Gasolina
-                        </Text>
-                        <Text fz="sm" fw={500}>
-                            R$ {getPrecos(precos, 'GASOLINA COMUM')}
-                            {
-                                precos && precos.map((preco) => (
-                                    <div>
-                                        {preco.produto === 'GASOLINA COMUM' ? <Text fz="xs" tt="uppercase" fw={700}>
-                                            <span style={{ fontSize: '10px', fontWeight: '300' }}>
-                                                {
-                                                    new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
-                                                        day: '2-digit',
-                                                        month: '2-digit',
-                                                        year: 'numeric'
-                                                    })
-                                                } - R$ {preco.preco} </span>
-                                        </Text> : <></>}
-                                    </div>
-                                ))
-
-                            }
-                        </Text>
+                    <div className="div">GASOLINA</div>
+                </div>
+                <div className="gasolina">
+                    <div className="text-wrapper">R$
+                        {getPrecos(precos, 'ETANOL')}
                     </div>
-                    <div withBorder className={classes.cardPrimary} radius="lg" m="xl" p="xl" >
-                        <Text fz="xs" tt="uppercase" fw={700}>
-                            Álcool
-                        </Text>
-                        <Text fz="lg" fw={500}>
-                            R$ {getPrecos(precos, 'ETANOL')}
-                            {
-                                precos && precos.map((preco) => (
-                                    <div>
-                                        {preco.produto === 'ETANOL' ? <Text fz="xs" tt="uppercase" fw={700}>
-                                            <span style={{ fontSize: '10px', fontWeight: '300' }}>
-                                                {
-                                                    new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
-                                                        day: '2-digit',
-                                                        month: '2-digit',
-                                                        year: 'numeric'
-                                                    })
-                                                } - R$ {preco.preco} </span>
-                                        </Text> : <></>}
-                                    </div>
-                                ))
-
-                            }
-                        </Text>
+                    <div className="div">ETANOL</div>
+                </div>
+                <div className="gasolina">
+                    <div className="text-wrapper">R$
+                        {getPrecos(precos, 'DIESEL S500')}
                     </div>
-                    <div withBorder className={classes.cardPrimary} radius="lg" m="xl" p="xl" >
-                        <Text fz="xs" tt="uppercase" fw={700}>
-                            Diesel
-                        </Text>
-                        <Text fz="lg" fw={500}>
-                            R$ {getPrecos(precos, 'DIESEL S500')}
-                            {
-                                precos && precos.map((preco) => (
-                                    <div>
-                                        {preco.produto === 'DIESEL S500' ? <Text fz="xs" tt="uppercase" fw={700}>
-                                            <span style={{ fontSize: '10px', fontWeight: '300' }}>
-                                                {
-                                                    new Date(preco.data_coleta).toLocaleDateString('pt-BR', {
-                                                        day: '2-digit',
-                                                        month: '2-digit',
-                                                        year: 'numeric'
-                                                    })
-                                                } - R$ {preco.preco} </span>
-                                        </Text> : <></>}
-                                    </div>
-                                ))
-
-                            }
-                        </Text>
-                    </div>
-                </Card>
-            </Card.Section>
-            <Card.Section className={classes.section} mt="md">
-                <Text fz="sm" c="dimmed" className={classes.label}>
+                    <div className="div">DIESEL S500</div>
+                </div>
+            </div>
+            <div className="info-tabela-qualidade">
+                <div>
                     Programa de Monitoramento da Qualidade dos Combustíveis
-                </Text>
-            </Card.Section>
-            <Card.Section>
+
+                </div>
                 {resultadoConsulta ?
                     <TabelaColeta data={coletas} />
                     :
                     <Text style={{ textAlign: 'center' }} fz="sm" c="dimmed" className={classes.label}>
                         Carregando ...
                     </Text>
-                }
-            </Card.Section>
+                }            </div>
+            <div className='icon-close' onClick={() => {
+                setInfoPanelState(!PanelState)
+            }}>
+                <img width="24" height="24" src="https://img.icons8.com/ios-glyphs/30/delete-sign.png" alt="delete-sign" />
+            </div>
         </Card >
     );
 

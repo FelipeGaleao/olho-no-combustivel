@@ -111,7 +111,7 @@ export function TabelaColeta({ data }) {
                 />
             </div>
 
-            <Table sx={{ height: '100px', overflowX: 'auto' }} verticalSpacing="xs">
+            <Table sx={{ height: '400px', overflowX: 'auto' }} verticalSpacing="xs">
                 <thead>
                     <tr>
                         <th>Data da coleta</th>
@@ -122,7 +122,7 @@ export function TabelaColeta({ data }) {
                         <th>Resultado</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style={{ fontWeight: "normal" }}>
                     {rows}
                 </tbody>
             </Table>
