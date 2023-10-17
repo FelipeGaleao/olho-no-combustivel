@@ -1,3 +1,6 @@
+body {
+  font-family: 'Inter';
+}
 .version {
     background-color: var(--primriaazul-400);
     border-radius: 8px;
@@ -39,10 +42,11 @@
   .card-info-posto {
     position: absolute;
     overflow: auto;
-    max-height: 80%;
+    max-height: 100%;
     top: 64px;
     right: 0;
     width: 720px;
+    grid-template-rows: 120px 220px 124px 145px 145px;
     } 
     @media (max-width: 768px){
         .card-info-posto {
@@ -56,4 +60,108 @@
             bottom: 10px;
         }
     
+    }
+    .info-title{
+      display: flex;
+      flex-direction: column;
+      /* set width to second element inside div*/
+      
+      
+      /* set space between elements 0px 
+      and space between lines 0px */      
+    }
+    .icon-close{
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      cursor: pointer;
+    }
+    .divider{
+      border-bottom: 1px solid #898E93;
+      margin-top: 16px;
+    }
+    .img-posto{
+      top: 16px;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+    .info-detalhes-postos{
+      margin-top: 24px;
+      color: var(--neutras-cinza-600, #898E93);
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 8px;
+      text-transform: uppercase;
+      height: 120px;
+    }
+    .info-detalhes-postos-content{
+      display: grid;
+      grid-template-columns: 370px 300px;
+      margin-top: 20px;  
+      padding-bottom: 16px;
+      border-bottom: 1px solid #898E93;
+    }
+    .info-precos-postos{
+      margin-top: 32px;
+      color: var(--neutras-cinza-600, #898E93);
+      font-weight: 700;
+      line-height: 8px;
+      font-size: 14px;
+      text-transform: uppercase;
+      height: 120px;
+      display: grid;
+      gap: 16px;  
+      grid-template-columns: 220px 220px 220px;
+    }
+
+    .gasolina {
+      margin-top: 20px;
+      align-items: center;
+      background-color: var(--primriaazul-500);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      height: 88px;
+      justify-content: center;
+      padding: 8px 0px;
+      position: relative;
+      width: 218px;
+    }
+    
+    .gasolina .text-wrapper {
+      color: var(--neutrasbranco);
+      font-family: "Inter-Bold", Helvetica;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: normal;
+      position: relative;
+      width: fit-content;
+    }
+    
+    .gasolina .div {
+      color: var(--neutrasbranco);
+      font-family: "Inter-Bold", Helvetica;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: normal;
+      position: relative;
+      white-space: nowrap;
+      width: fit-content;
+    }
+    .info-tabela-qualidade{
+        margin-top: 32px;
+        color: var(--neutras-cinza-600, #898E93);
+        font-weight: 700;
+        /* add space betweens divs to 20px */
+        line-height: 8px;
+        font-size: 14px;
+        text-transform: uppercase;
+        height: 100%;
+        display: grid;
+        gap: 16px;
     }
