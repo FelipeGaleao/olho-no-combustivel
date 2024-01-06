@@ -1,7 +1,7 @@
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import postos, coletas
+from .api.v1.endpoints import postos, coletas
 
 app = FastAPI(
     title="OlhoNoCombustivel",

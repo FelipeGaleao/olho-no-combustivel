@@ -9,3 +9,10 @@ scrapping_data\pmqc_processed\coletas.json
 *coletas.json
 node_modules/*
 *.xlsx
+.env
+/data/
+
+scrapping_data/fuel_price_processed
+scrapping_data/levantamento_semanal_precos
+scrapping_data/pmqc
+scrapping_data/pmqc_processed
