@@ -1,4 +1,5 @@
 from ..repositories.PostosRepository import PostosRepository
+from ..repositories.PrecosRepository import PrecosRepository
 from typing import Union
 
 
@@ -26,3 +27,16 @@ def get_posto(
         return postos_encontrados
 
     return postos_encontrados
+
+def get_posto_by_cnpj(cnpj_posto):
+    postosRepository = PostosRepository()
+    precosRepository = PrecosRepository()
+
+    posto_encontrado = postosRepository.get_by_cnpj(cnpj_posto)
+    precos_encontrados = precosRepository.get_preco_by_cnpj(cnpj_posto)
+
+    info_posto = {
+        "detalhe_posto": posto_encontrado,
+        "precos_posto": precos_encontrados
+    }
+    return info_posto

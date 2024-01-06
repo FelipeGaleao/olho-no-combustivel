@@ -4,13 +4,6 @@ from ..repositories.PostosRepository import PostosRepository
 from typing import Union
 
 
-def get_all_postos():
-    return PostosRepository().get_all()
-
-
-def get_posto_by_id(id):
-    return PostosRepository().get_by_id(id)
-
 
 def get_posto(
     Municipio: Union[str, None] = None,
@@ -25,4 +18,4 @@ def get_posto(
     )
 
 def get_posto_by_cnpj(cnpj):
-    return PostosRepository().get_by_cnpj(cnpj)
+    return PostosServices.get_posto_by_cnpj(cnpj)
