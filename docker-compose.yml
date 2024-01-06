@@ -10,6 +10,8 @@ services:
       context: backend
       dockerfile: Dockerfile
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    env_file:
+      - .env
     volumes:
       - ./backend/:/code/app
     ports:
@@ -28,3 +30,14 @@ services:
       - 5173
     depends_on:
       - backend
+  mongodb: 
+    image: mongo
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
