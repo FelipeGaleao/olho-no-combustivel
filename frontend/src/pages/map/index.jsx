@@ -142,10 +142,25 @@ const MapPage = () => {
 
   const MapController = () => {
     const map = useMap();
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      setMinhaPosicaoAtual([position.coords.latitude, position.coords.longitude]);
+      if(params_url && params_url.cnpj){
+        map.setView([position.coords.latitude, position.coords.longitude], 18);
+      }
+    });
+
     useMapEvent("moveend", () => {
       // show the coordinates
       setLimitesMapa([map.getCenter().lat, map.getCenter().lng]);
-      fetchPostosCombustiveis();
+      // check if posicaoAtual to next position is major than 10km, if true fetch postos
+      if (
+        Math.abs(posicaoAtual[0] - map.getCenter().lat) > 0.1 ||
+        Math.abs(posicaoAtual[1] - map.getCenter().lng) > 0.1
+      ) {
+        setPosicaoAtual([map.getCenter().lat, map.getCenter().lng]);
+        fetchPostosCombustiveis();
+      }
     });
     useMapEvent("created", () => {
       // show the coordinates
