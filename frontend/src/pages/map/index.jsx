@@ -83,10 +83,12 @@ const MapPage = () => {
         })
     }
 
+    const mapKey = posicaoAtual.join(',');
+
 
     return (
         <div style={{ height: '100vh', width: '100vw' }}>
-            <MapContainer style={{ height: '100vh', width: '100vw', zIndex: 1 }} center={posicaoAtual}
+            <MapContainer key={mapKey} style={{ height: '100vh', width: '100vw', zIndex: 1 }} center={posicaoAtual}
                 zoom={18} scrollWheelZoom={true}>
                 <MapController />
 
