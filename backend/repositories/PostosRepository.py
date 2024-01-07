@@ -42,7 +42,7 @@ class PostosRepository:
             lat = float(lat)
             long = float(long)
 
-        # find postos with max distance of 50km, sorting by distance and custom column "distancia" from lat and long to geometry column
+        # find postos with max distance of 50km, sorting by distance and custom column "distancia" in KM from lat and long to geometry column
         # show fist 200 results, with column distance
         postos = []
 
@@ -53,7 +53,7 @@ class PostosRepository:
                         "$geoNear": {
                             "near": {"type": "Point", "coordinates": [long, lat]},
                             "distanceField": "distancia",
-                            "maxDistance": max_distance * 10,
+                            "maxDistance": max_distance * 1000,
                             "spherical": True,
                         }
                     },
@@ -66,6 +66,7 @@ class PostosRepository:
         postos_encontrados = []
         for posto in postos:
             try:
+                posto['distancia'] = posto['distancia'] / 1000
                 posto = Posto(**posto)
                 postos_encontrados.append(posto)
             except ValueError as e:
