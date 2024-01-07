@@ -42,7 +42,7 @@ const MapPage = () => {
   });
 
   const [titlePage, setTitlePage] = useState("👀 Olho no Combustível");
-
+   
   const getCurrentLocation = (moveMap) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -129,7 +129,7 @@ const MapPage = () => {
       getCurrentLocation(true);
     }
     setPainelAberto(false);
-  }, []);
+  }, [minhaPosicaoAtual]);
 
   // useMapEvent('moveend', () => {
   //     const map = mapRef.current;
