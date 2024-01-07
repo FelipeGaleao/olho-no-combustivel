@@ -1,0 +1,16 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(151, 153, 253, 1);
+    align-items: center;
+    justify-content: center;
+    line-height: 1.3vh;
+    height: 100%;
+}
+p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 1);
+    margin: 0;
+    padding: 0;
+}
