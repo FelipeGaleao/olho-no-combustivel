@@ -129,7 +129,7 @@ const MapPage = () => {
       getCurrentLocation(true);
     }
     setPainelAberto(false);
-  }, [minhaPosicaoAtual]);
+  }, []);
 
   // useMapEvent('moveend', () => {
   //     const map = mapRef.current;
