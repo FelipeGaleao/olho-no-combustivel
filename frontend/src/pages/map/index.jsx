@@ -162,7 +162,7 @@ const MapPage = () => {
           <title>{titlePage} </title>
           <meta
             name="description"
-            content="Plataforma para encontrar o melhor preço de combustível na sua região."
+            content={meta.description}
           />
           <meta property="og:type" content={meta.type} />
           <meta property="og:title" content={meta.title} />
