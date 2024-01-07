@@ -53,7 +53,7 @@ class PostosRepository:
                         "$geoNear": {
                             "near": {"type": "Point", "coordinates": [long, lat]},
                             "distanceField": "distancia",
-                            "maxDistance": max_distance * 100,
+                            "maxDistance": max_distance * 10,
                             "spherical": True,
                         }
                     },

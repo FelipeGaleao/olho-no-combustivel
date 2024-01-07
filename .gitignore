@@ -1,5 +1,6 @@
 env
 scrapping_data\pmqc\*
+*.pyc
 *_cache
 */__pycache__
 /*.pytest_cache
