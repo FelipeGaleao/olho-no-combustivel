@@ -107,6 +107,13 @@ const MapPage = () => {
             response.data.detalhe_posto[0].RazaoSocialPosto +
               " - 👀 Olho no Combustível"
           );
+          setMeta({
+            type: "website",
+            title: response.data.detalhe_posto[0].RazaoSocialPosto + " - 👀 Olho no Combustível",
+            description:
+              "Confira os últimos preços divulgados para o " + response.data.detalhe_posto[0].RazaoSocialPosto + " em " + response.data.detalhe_posto[0].Bairro + ", " + response.data.detalhe_posto[0].Município + " - " + response.data.detalhe_posto[0].Uf + ".",
+            });
+
           setPosicaoAtual([
             response.data.detalhe_posto[0].Latitude,
             response.data.detalhe_posto[0].Longitude,
