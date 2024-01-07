@@ -158,7 +158,6 @@ const MapPage = () => {
         Math.abs(posicaoAtual[0] - map.getCenter().lat) > 0.1 ||
         Math.abs(posicaoAtual[1] - map.getCenter().lng) > 0.1
       ) {
-        setPosicaoAtual([map.getCenter().lat, map.getCenter().lng]);
         fetchPostosCombustiveis();
       }
     });
