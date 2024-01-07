@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { CardPostoInfo } from "../../components/cardpostoinfo";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { infoPanelState } from "../../atoms";
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 
 import "../../../public/leaflet.css";
 import ReactGA from "react-ga4";
@@ -22,6 +22,9 @@ const MapPage = () => {
   const [postos, setPostos] = useState([]);
   const [situacaoPainel, setSituacaoPainel] = useState(false);
   const [limitesMapa, setLimitesMapa] = useState([-20.461016, -54.6122]);
+  const [minhaPosicaoAtual, setMinhaPosicaoAtual] = useState([
+    -20.461016, -54.6122,
+  ]);
   const [postoSelecionado, setPostoSelecionado] = useState({});
   const [hue, setHue] = useState(0);
   const color = `#0000ff`;
@@ -30,20 +33,35 @@ const MapPage = () => {
   const [posicaoAtual, setPosicaoAtual] = useState([-20.461016, -54.6122]);
   const [bounds, setBounds] = useState(null);
   const [moved, setMoved] = useState(false);
-  const params_url = useParams(); 
+  const params_url = useParams();
   const [meta, setMeta] = useState({
     type: "website",
     title: "👀 Olho no Combustível",
-    description: "Plataforma para encontrar o melhor preço de combustível na sua região.",
-    });
-    
+    description:
+      "Plataforma para encontrar o melhor preço de combustível na sua região.",
+  });
+
   const [titlePage, setTitlePage] = useState("👀 Olho no Combustível");
 
-  const getCurrentLocation = () => {
+  const getCurrentLocation = (moveMap) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        setLimitesMapa([position.coords.latitude, position.coords.longitude]);
-        setPosicaoAtual([position.coords.latitude, position.coords.longitude]);
+        if (moveMap) {
+          setLimitesMapa([position.coords.latitude, position.coords.longitude]);
+          setPosicaoAtual([
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
+          setMinhaPosicaoAtual([
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
+        } else {
+          setMinhaPosicaoAtual([
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
+        }
       });
     } else {
       alert("Geolocation is not supported by this browser.");
@@ -78,13 +96,17 @@ const MapPage = () => {
   useEffect(() => {
     fetchPostosCombustiveis();
     if (params_url && params_url.cnpj) {
+      getCurrentLocation(false);
       try {
         api.get("/postos/getByCnpj/" + params_url.cnpj).then((response) => {
           if (response.data.detalhe_posto.length === 0) {
             window.location.href = "/not_found";
           }
 
-          setTitlePage(response.data.detalhe_posto[0].RazaoSocialPosto + " - 👀 Olho no Combustível");
+          setTitlePage(
+            response.data.detalhe_posto[0].RazaoSocialPosto +
+              " - 👀 Olho no Combustível"
+          );
           setPosicaoAtual([
             response.data.detalhe_posto[0].Latitude,
             response.data.detalhe_posto[0].Longitude,
@@ -97,7 +119,7 @@ const MapPage = () => {
         window.location.href = "/not_found";
       }
     } else {
-      getCurrentLocation();
+      getCurrentLocation(true);
     }
     setPainelAberto(false);
   }, []);
@@ -136,14 +158,14 @@ const MapPage = () => {
             content="Plataforma para encontrar o melhor preço de combustível na sua região."
           />
           <meta property="og:type" content={meta.type} />
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:description" content={meta.description} />
-        { /* End Facebook tags */ }
-        { /* Twitter tags */ }
-        <meta name="twitter:creator" content={name} />
-        <meta name="twitter:card" content={meta.type} />
-        <meta name="twitter:title" content={meta.title} />
-        <meta name="twitter:description" content={meta.description} />
+          <meta property="og:title" content={meta.title} />
+          <meta property="og:description" content={meta.description} />
+          {/* End Facebook tags */}
+          {/* Twitter tags */}
+          <meta name="twitter:creator" content={name} />
+          <meta name="twitter:card" content={meta.type} />
+          <meta name="twitter:title" content={meta.title} />
+          <meta name="twitter:description" content={meta.description} />
         </Helmet>
       </div>
 
@@ -161,12 +183,12 @@ const MapPage = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker
-          key={"posicaoAtual"}
+          key={"minhaPosicaoAtual"}
           icon={L.divIcon({
             className: "custom-div-icon-marker",
             html: `<img width="40" height="40" src="https://img.icons8.com/ultraviolet/40/car.png" alt="car"/>`,
           })}
-          position={posicaoAtual}
+          position={minhaPosicaoAtual}
         >
           <Tooltip
             offset={[15, 5]}
@@ -197,7 +219,9 @@ const MapPage = () => {
                       "",
                       "/posto/" + posto.CnpjPosto
                     );
-                    setTitlePage(posto.RazaoSocialPosto + " - 👀 Olho no Combustível");
+                    setTitlePage(
+                      posto.RazaoSocialPosto + " - 👀 Olho no Combustível"
+                    );
                     PanelState
                       ? setInfoPanelState(true)
                       : setInfoPanelState(true);
