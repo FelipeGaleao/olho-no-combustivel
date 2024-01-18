@@ -108,7 +108,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
 
 
     const features = mockdata.map((feature) => (
-        <div style={{ marginTop: '8px' }} >
+        <div key={feature.title} style={{ marginTop: '8px' }} >
             <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
             <span style={{ color: 'gray', fontWeight: 500 }}>{feature.title}:</span>
             <span fz="sm">
@@ -131,7 +131,7 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                 <div>
                     SOBRE O POSTO
                 </div>
-                <div class="info-detalhes-postos-content">
+                <div className="info-detalhes-postos-content">
                     {features}
                 </div>
             </div>
