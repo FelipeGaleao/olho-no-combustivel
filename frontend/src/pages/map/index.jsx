@@ -145,10 +145,9 @@ const MapPage = () => {
     const map = useMap();
 
     navigator.geolocation.getCurrentPosition((position) => {
-      if(!params_url && !params_url.cnpj){
-        map.setView([position.coords.latitude, position.coords.longitude], 16);
-      }else{
-        setMinhaPosicaoAtual([position.coords.latitude, position.coords.longitude]);
+      setMinhaPosicaoAtual([position.coords.latitude, position.coords.longitude]);
+      if(params_url && params_url.cnpj){
+        map.setView([position.coords.latitude, position.coords.longitude], 18);
       }
     });
 
@@ -163,10 +162,10 @@ const MapPage = () => {
         fetchPostosCombustiveis();
       }
     });
-    // useMapEvent("created", () => {
-    //   // show the coordinates
-    //   map.setView(posicaoAtual[0], posicaoAtual[1]);
-    // });
+    useMapEvent("created", () => {
+      // show the coordinates
+      map.setView(posicaoAtual[0], posicaoAtual[1]);
+    });
   };
 
   const mapKey = posicaoAtual.join(",");
@@ -314,7 +313,6 @@ const MapPage = () => {
         }
       </MapContainer>
       <CardPostoInfo
-        key={postoSelecionado.CnpjPosto}
         style={{ zIndex: 10 }}
         infoPostoSelecionado={postoSelecionado}
       />
