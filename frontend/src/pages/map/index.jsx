@@ -228,7 +228,7 @@ const MapPage = () => {
               <Marker
                 key={posto.CnpjPosto}
                 position={[posto.Latitude, posto.Longitude]}
-                icon={isClickedIcon ? 
+                icon={postoSelecionado.CnpjPosto !== posto.CnpjPosto ?
                   L.divIcon({
                     className: "custom-div-icon-marker",
                     html: `<img src="https://www.olhonocombustivel.com/images/gas-station.png">`,
@@ -288,9 +288,11 @@ const MapPage = () => {
                 }}
               >
                 <Tooltip
-                  offset={[30, 20]}
+                  key={"tooltip" + posto.CnpjPosto}
                   className="tooltip-content"
-                  permanent
+                  // if is mobile = permanent else sticky
+                  permanent={window.innerWidth < 768 ? true : false}
+                  sticky={window.innerWidth < 768 ? false : true}
                 >
                   <span>
                     <b>{posto.RazaoSocialPosto}</b>

@@ -689,6 +689,19 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	font-size: 10px;
 	border: none;
 }
+.tooltip-content-orange{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	color: white;
+	align-items: center;
+	padding: 10px;
+	border-radius: 16px;
+	background-color: orange;
+	font-size: 10px;
+	border: none;
+}
 
 .custom-div-icon-marker {
 	background-color: transparent;
