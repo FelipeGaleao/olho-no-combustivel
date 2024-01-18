@@ -32,6 +32,7 @@ const MapPage = () => {
   const setInfoPanelState = useSetRecoilState(infoPanelState);
   const [posicaoAtual, setPosicaoAtual] = useState([-20.461016, -54.6122]);
   const [bounds, setBounds] = useState(null);
+  const [isClickedIcon, setIsClickedIcon] = useState(false)
   const [moved, setMoved] = useState(false);
   const params_url = useParams();
   const [meta, setMeta] = useState({
@@ -227,10 +228,16 @@ const MapPage = () => {
               <Marker
                 key={posto.CnpjPosto}
                 position={[posto.Latitude, posto.Longitude]}
-                icon={L.divIcon({
-                  className: "custom-div-icon-marker",
-                  html: `<img src="https://www.olhonocombustivel.com/images/marker-icon.png">`,
-                })}
+                icon={isClickedIcon ? 
+                  L.divIcon({
+                    className: "custom-div-icon-marker",
+                    html: `<img src="https://www.olhonocombustivel.com/images/gas-station.png">`,
+                  })
+                  :
+                  L.divIcon({
+                    className: "custom-div-icon-marker",
+                    html: `<img src="https://www.olhonocombustivel.com/images/gas-station-selected.png">`,
+                  })}
                 eventHandlers={{
                   // show posto name on click and set situacaoPainel
                   click: () => {
