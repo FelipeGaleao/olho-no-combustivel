@@ -1,7 +1,7 @@
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 
-from .api.v1.endpoints import postos, coletas
+from .api.v1.endpoints import postos, coletas, revisoes
 
 app = FastAPI(
     title="OlhoNoCombustivel",
@@ -15,6 +15,10 @@ app = FastAPI(
         {
             "name": "coletas",
             "description": "Endpoints para consulta de dados do Programa de Monitoramento da Qualidade dos Combustíveis",
+        },
+        {
+            "name": "revisoes",
+            "description": "Endpoints para consulta de dados de revisões de preços de combustíveis",
         },
     ],
 )
@@ -30,7 +34,7 @@ app.add_middleware(
 
 app.include_router(postos.router)
 app.include_router(coletas.router)
-
+app.include_router(revisoes.router)
 
 def on_startup():
     """Função executada no startup da aplicação"""

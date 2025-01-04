@@ -25,20 +25,20 @@ class MongoAdapter:
     def get_db(self):
         return self.__db
 
-    def get_collection(self, collection_name):
+    def get_collection(self, collection_name: str):
         return self.__db[collection_name]
 
     def get_collection_names(self):
         return self.__db.list_collection_names()
 
-    def get_collection_count(self, collection_name):
+    def get_collection_count(self, collection_name: str):
         return self.__db[collection_name].count_documents({})
 
-    def get_collection_indexes(self, collection_name):
+    def get_collection_indexes(self, collection_name: str   ):
         return self.__db[collection_name].index_information()
 
-    def get_collection_indexes_names(self, collection_name):
+    def get_collection_indexes_names(self, collection_name: str ):
         return self.__db[collection_name].index_information().keys()
 
-    def get_collection_indexes_count(self, collection_name):
+    def get_collection_indexes_count(self, collection_name: str):
         return len(self.__db[collection_name].index_information().keys())
