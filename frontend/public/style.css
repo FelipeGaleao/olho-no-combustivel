@@ -1,24 +1,50 @@
+/* Estilos Base */
 body {
   font-family: 'Inter';
 }
+
+/* Estilos Comuns */
 .version {
-    background-color: var(--primriaazul-400);
-    border-radius: 8px;
-    display: block;
-    gap: 10px;
-    margin: 15px;
-  }
-  
-  .version a {
-    color: var(--neutrasbranco);
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 14px;
-    font-weight: 400;
-    padding: 10px;
-    letter-spacing: 0;
-    line-height: normal;
-    width: fit-content;
-  }
+  background-color: var(--primriaazul-400);
+  border-radius: 8px;
+  display: block;
+  gap: 10px;
+  margin: 15px;
+}
+
+.version a {
+  color: var(--neutrasbranco);
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px;
+  letter-spacing: 0;
+  line-height: normal;
+  width: fit-content;
+}
+
+/* Scrollbar Personalizada */
+.card-info-posto::-webkit-scrollbar-track {
+  width: 5px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #F5F5F5;
+  background: transparent;
+}
+
+.card-info-posto::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #F5F5F5;
+}
+
+.card-info-posto::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: var(--primriaazul-500);
+}
+
+/* Estilos Desktop (> 768px) */
+@media (min-width: 768px) {
   .sidebar {
     align-items: flex-start;
     background-color: var(--primriaazul-500);
@@ -29,32 +55,7 @@ body {
     width: 100%;
     position: relative;
   }
-  .sidebar .header {
-    align-items: flex-start;
-    background-color: transparent;
-    display: flex;
-    flex: 0 0 auto;
-    justify-content: center;
-    padding: 0px 0px 16px;
-    position: relative;
-    width: 100%;
-  }
-  .card-info-posto::-webkit-scrollbar-track {
-    width: 5px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
-    background: transparent;
-  }
-  .card-info-posto::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    background-color: #F5F5F5;
-  }
-  .card-info-posto::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: var(--primriaazul-500);
-  }
+
   .card-info-posto {
     overflow-y: hidden;
     position: absolute;
@@ -63,127 +64,167 @@ body {
     top: 64px;
     right: 0;
     width: 720px;
-    grid-template-rows: 120px 220px 124px 145px 145px;
-    } 
-    .img-posto{
-      top: 16px;
-      height: 100%;
-      object-fit: cover;
-      width: 100%;
-    }
-    @media (max-width: 768px){
-        .card-info-posto {
-            width: 90vw;
-            position: absolute;
-            overflow: auto;
-            max-height: 80%;
-            /* force all font size to be 10px */
-            font-size: 11px;
-            right: 20px;
-            bottom: 10px;
-        }
-    
-    }
-    .info-title{
-      display: flex;
-      flex-direction: column;
-      /* set width to second element inside div*/
-      
-      
-      /* set space between elements 0px 
-      and space between lines 0px */      
-    }
-    .icon-close{
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      cursor: pointer;
-    }
-    .divider{
-      border-bottom: 1px solid #898E93;
-      margin-top: 16px;
-    }
-    .info-detalhes-postos{
-      margin-top: 24px;
-      color: var(--neutras-cinza-600, #898E93);
-      font-family: Inter;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 8px;
-      text-transform: uppercase;
-      height: 120px;
-    }
-    .info-detalhes-postos-content{
-      display: grid;
-      grid-template-columns: 370px 300px;
-      margin-top: 20px;  
-      padding-bottom: 16px;
-      border-bottom: 1px solid #898E93;
-    }
-    .info-precos-postos{
-      margin-top: 32px;
-      color: var(--neutras-cinza-600, #898E93);
-      font-weight: 700;
-      line-height: 8px;
-      font-size: 14px;
-      text-transform: uppercase;
-      height: 120px;
-      display: grid;
-      gap: 16px;  
-      grid-template-columns: 220px 220px 220px;
-    }
+    grid-template-rows: 120px 220px 145px 20px 145px 145px
+  }
 
-    .gasolina {
-      margin-top: 20px;
-      align-items: center;
-      background-color: var(--primriaazul-500);
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      height: 88px;
-      justify-content: center;
-      padding: 8px 0px;
-      position: relative;
-      width: 218px;
-    }
-    
-    .gasolina .text-wrapper {
-      color: var(--neutrasbranco);
-      font-family: "Inter-Bold", Helvetica;
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: 0;
-      line-height: normal;
-      position: relative;
-      width: fit-content;
-    }
-    
-    .gasolina .div {
-      color: var(--neutrasbranco);
-      font-family: "Inter-Bold", Helvetica;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0;
-      line-height: normal;
-      position: relative;
-      white-space: nowrap;
-      width: fit-content;
-    }
-    .info-tabela-qualidade{
-        margin-top: 32px;
-        color: var(--neutras-cinza-600, #898E93);
-        font-weight: 700;
-        /* add space betweens divs to 20px */
-        line-height: 8px;
-        font-size: 14px;
-        text-transform: uppercase;
-        height: 600px;
-        display: grid;
-        gap: 16px;
-        grid-template-rows: 24px fit-content(100%) fit-content(100%);
-    }
-    .leaflet-top {
-      display: block !important;
-      top: 50px !important;
-    }
+  .info-detalhes-postos-content {
+    display: grid;
+    grid-template-columns: 370px 300px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #898E93;
+  }
+
+  .gasolina {
+    margin-top: 20px;
+    align-items: center;
+    background-color: var(--primriaazul-500);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    height: 88px;
+    width: 220px;
+    justify-content: center;
+    padding: 8px 0px;
+    position: relative;
+  }
+}
+
+/* Estilos Mobile (≤ 768px) */
+@media (max-width: 768px) {
+  .card-info-posto {
+    width: 90vw;
+    position: absolute;
+    overflow: auto;
+    max-height: 100%;
+    font-size: 11px;
+    right: 20px;
+    bottom: 10px;
+    top: 64px;
+  }
+
+  .info-detalhes-postos-content {
+    display: grid;
+    padding-bottom: 16px;
+    margin-bottom: 30px;
+  }
+
+  .gasolina {
+    margin-top: 20px;
+    align-items: center;
+    background-color: var(--primriaazul-500);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    justify-content: center;
+    padding: 8px 0px;
+    position: relative;
+    width: 350px;
+  }
+}
+
+/* Elementos Comuns */
+.sidebar .header {
+  align-items: flex-start;
+  background-color: transparent;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  padding: 0px 0px 16px;
+  position: relative;
+  width: 100%;
+}
+
+.img-posto {
+  top: 16px;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.info-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+}
+
+.divider {
+  border-bottom: 1px solid #898E93;
+  margin-top: 16px;
+  height: 5px;
+}
+
+.info-detalhes-postos {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  color: var(--neutras-cinza-600, #898E93);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+  height: 200px;
+}
+
+.info-precos-postos {
+  margin-top: 20px;
+  margin-bottom: 32px;
+  color: var(--neutras-cinza-600, #898E93);
+  font-weight: 700;
+  line-height: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gasolina .text-wrapper {
+  color: var(--neutrasbranco);
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.gasolina .div {
+  color: var(--neutrasbranco);
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.info-tabela-qualidade {
+  margin-top: 60px;
+  color: var(--neutras-cinza-600, #898E93);
+  font-weight: 700;
+  line-height: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  grid-template-rows: 24px fit-content(100%) fit-content(100%);
+}
+
+.leaflet-top {
+  display: block !important;
+  top: 50px !important;
+}

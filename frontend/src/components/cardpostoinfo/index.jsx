@@ -135,10 +135,12 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                     {features}
                 </div>
             </div>
+            <div className="divider"></div>
             <div className="info-precos-postos">
-                <div style={{ position: 'absolute', top: '510px', height: '15px' }}>
+                <div>
                     PREÇOS
                 </div>
+                <div style={{ display: 'flex', flexDirection: window.innerWidth <= 768 ? 'column' : 'row', gap: window.innerWidth <= 768 ? '' : '16px', height: '100%' }}>
                 <div className="gasolina">
                     <div className="text-wrapper">
                         R$ {getPrecos(precos, 'GASOLINA COMUM')}
@@ -158,8 +160,9 @@ export function CardPostoInfo({ infoPostoSelecionado }) {
                     </div>
                     <div className="div">DIESEL S500</div>
                 </div>
+                </div>
             </div>
-            <div className="info-tabela-qualidade">
+            <div className="info-tabela-qualidade" style={{ display: window.innerWidth <= 768 ? 'none' : 'flex' }}>
                 <div>
                     Programa de Monitoramento da Qualidade dos Combustíveis
 
