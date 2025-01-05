@@ -18,7 +18,7 @@ app = FastAPI(
         },
         {
             "name": "revisoes",
-            "description": "Endpoints para consulta de dados de revisões de preços de combustíveis",
+            "description": "Endpoints para revisão de preços de combustíveis",
         },
     ],
 )

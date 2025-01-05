@@ -16,4 +16,7 @@ class PrecosRepository:
             preco = Precos(**preco)
             precos_encontrados.append(preco)
         return precos_encontrados
-        
+
+    def create_preco(self, preco: Precos):
+        collection = self.db["precos"]
+        collection.insert_one(preco.to_dict())
