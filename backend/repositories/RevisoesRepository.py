@@ -35,3 +35,7 @@ class RevisoesRepository:
     def reprovar_revisao(self, revisao_id: str):
         collection = self.db["revisoes"]
         collection.update_one({"_id": ObjectId(revisao_id)}, {"$set": {"status": StatusRevisaoEnum.reprovada}})
+
+    def update_revisao(self, revisao: Revisoes):
+        collection = self.db["revisoes"]
+        collection.update_one({"_id": ObjectId(revisao.id)}, {"$set": revisao.to_dict()})

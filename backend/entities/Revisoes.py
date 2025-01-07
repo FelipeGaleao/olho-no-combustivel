@@ -12,6 +12,7 @@ class StatusRevisaoEnum(str, Enum):
     aguardando_processamento = "AGUARDANDO_PROCESSAMENTO"
     processando_imagem = "PROCESSANDO_IMAGEM"
     aguardando_validacao = "AGUARDANDO_VALIDACAO"
+    aguardando_revisao_manual = "AGUARDANDO_REVISAO_MANUAL"
     reprovada = "REPROVADA"
     aprovada = "APROVADA"
 
@@ -35,4 +36,9 @@ class Revisoes(BaseModel):
 
     def from_dict(cls, other: dict):
         return Revisoes(**other)
-
+    
+    def to_dict(self, include_id: bool = False):
+        if include_id:
+            return self.model_dump(by_alias=True)
+        else:
+            return self.model_dump(by_alias=True, exclude={"id"})

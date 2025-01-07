@@ -37,3 +37,22 @@ def revisar_revisao(revisao_id: str,
                     lista_precos_aprovacao: ListaPrecosAprovacaoDTO,
                     status: StatusRevisaoEnum = None):
     return RevisoesServices.revisar_revisao(revisao_id, lista_precos_aprovacao, status)
+
+
+@router.post(
+    "/revisoes/processar_imagem",
+    name="Processar imagem de uma revisão de preços",
+    description="Endpoint para processar imagem de uma revisão de preços",
+    tags=["revisoes"],
+)
+def processar_imagem(revisao_id: str):
+    return RevisoesServices.processar_imagem(revisao_id)
+
+@router.post(
+    "/revisoes/processar_todas",
+    name="Processar todas as revisões de preços",
+    description="Endpoint para processar todas as revisões de preços",
+    tags=["revisoes"],
+)
+def processar_todas_revisoes():
+    return RevisoesServices.processar_todas_revisoes()
