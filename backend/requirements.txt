@@ -2,3 +2,5 @@ fastapi
 uvicorn
 pytest
 pymongo
+google-generativeai
+Pillow
