@@ -46,6 +46,7 @@ export default defineConfig({
   server: {
     host: true,
     port: 5173,
+    allowedHosts: ["www.olhonocombustivel.com"]
     watch: {
       usePolling: true,
     }
